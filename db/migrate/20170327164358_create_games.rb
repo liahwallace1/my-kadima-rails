@@ -4,6 +4,7 @@ class CreateGames < ActiveRecord::Migration[5.0]
       t.string :distance
       t.string :game_type
       t.integer :volley_total
+      t.boolean :public_view, :default => false
       t.integer :location_id
 
       t.timestamps

@@ -4,7 +4,7 @@ class CreateLocations < ActiveRecord::Migration[5.0]
       t.string :name
       t.string :city
       t.string :state
-      t.boolean :lighting
+      t.boolean :lighting, :default => false
       t.string :turf
 
       t.timestamps
