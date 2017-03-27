@@ -16,7 +16,7 @@ class GamesController < ApplicationController
     if @game.save
       redirect_to game_path(@game)
     else
-      flash[:message] = @user.errors.full_messages.uniq.join(', ')
+      flash[:message] = @game.errors.full_messages.uniq.join(', ')
       render :new
     end
   end
@@ -29,13 +29,6 @@ class GamesController < ApplicationController
     set_game
     @user.update(game_params)
     redirect_to game_path(@game)
-  end
-
-  def destroy
-    set_user
-    @user.destroy
-    session.delete :user_id
-    redirect_to root_path
   end
 
   private
