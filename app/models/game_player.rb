@@ -1,0 +1,3 @@
+class GamePlayer < ApplicationRecord
+
+end
