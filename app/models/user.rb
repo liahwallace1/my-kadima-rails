@@ -9,4 +9,22 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :password, length: {in: 8..24}
 
+  def high_score_single
+  end
+
+  def high_score_group
+  end
+
+  def best_partner
+  end
+
+  def best_group
+  end
+
+  def frequent_partner
+  end
+
+  def frequent_location
+  end
+
 end
