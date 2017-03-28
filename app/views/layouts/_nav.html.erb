@@ -3,12 +3,12 @@
         <li> <%= link_to "Home", root_path %> </li>
 
         <% if logged_in? %>
-          <li> Signed in as <%= link_to "current_user.username", user_path(current_user) %> </li>
-          <li> <%= link_to "Sign out", logout_path, :method => :delete %> </li>
+          <li> Welcome, <%= link_to "#{current_user.username}", user_path(current_user) %>. </li>
+          <li> <%= link_to "Log Out", logout_path %> </li>
 
         <% else %>
-          <li> <%= link_to "Sign up", new_user_path %> </li>
-          <li> <%= link_to "Log in", login_path %> </li>
+          <li> <%= link_to "Sign Up", new_user_path %> </li>
+          <li> <%= link_to "Log In", login_path %> </li>
         <% end %>
     </ul>
 </nav>
