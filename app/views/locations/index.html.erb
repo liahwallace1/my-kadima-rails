@@ -1,1 +1,7 @@
-Locations Index
+Kadima Locations
+
+<ul>
+<%= @locations.each do |location| %>
+  <li><%= link_to location.name, location_path(location) %></li>
+<% end %>
+</ul>
