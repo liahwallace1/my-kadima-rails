@@ -27,7 +27,7 @@ class LocationsController < ApplicationController
 
   def update
     set_location
-    @location.upate(location_params)
+    @location.update(location_params)
     redirect_to location_path(@location)
   end
 

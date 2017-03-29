@@ -1,7 +1,8 @@
 Kadima Locations
 
 <ul>
-<%= @locations.each do |location| %>
-  <li><%= link_to location.name, location_path(location) %></li>
+<% @locations.each do |location| %>
+  <li><strong><%= link_to location.name, location_path(location) %></strong><br>
+    <%= location.city %>, <%= location.state %></li>
 <% end %>
 </ul>

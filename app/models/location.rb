@@ -3,4 +3,8 @@ class Location < ApplicationRecord
   has_many :players, through: :games
 
   validates_presence_of :name, :city, :state, :turf
+
+  def rank
+  end
+  
 end

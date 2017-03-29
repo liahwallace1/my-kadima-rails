@@ -1,1 +1,12 @@
-Location Show
+<h1><%= @location.name %> Information </h1>
+<h3><%= @location.city%>, <%= @location.state %></h3>
+
+<p>Ranked #<%= @location.rank %> of <%=Location.all.count%> locations, based on number of games played there.</p>
+<br>
+<p>Turf: <%= @location.turf %></p>
+<br>
+<% if @location.lighting %>
+  <p><strong>This location has lighting at night!</strong></p>
+<% else %>
+  <p>This location is NOT lit at night.</p>
+<% end %>
