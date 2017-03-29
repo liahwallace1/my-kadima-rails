@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20170327170911) do
   end
 
   create_table "games", force: :cascade do |t|
+    t.date     "date_played"
     t.string   "distance"
     t.string   "game_type"
     t.integer  "volley_total"

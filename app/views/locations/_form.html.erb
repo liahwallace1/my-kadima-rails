@@ -1,1 +1,13 @@
-Location form
+<%= form_for @location do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.label :city %>
+  <%= f.text_field :city %>
+  <%= f.label :state %>
+  <%= select_tag "state", options_for_select(state_array.collect {|s| [s, s]}) %>
+  <%= f.label "Check if this location has lighting at night: " %>
+  <%= f.check_box :lighting %>
+  <%= f.label :turf %>
+  <%= select_tag "turf", options_for_select(turf_options.collect {|t| [t, t]}) %>
+  <%= f.submit %>
+<% end %>
