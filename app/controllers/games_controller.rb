@@ -8,7 +8,6 @@ class GamesController < ApplicationController
   end
 
   def new
-    @game = Game.new
   end
 
   def create
@@ -38,7 +37,7 @@ class GamesController < ApplicationController
   end
 
   def game_params
-    params.require(:game).permit(:total_volley, :turf, :distance, :game_type, :location_id)
+    params.require(:game).permit(:total_volley, :turf, :distance, :game_type, :location_id, :played_with)
   end
 
 end
