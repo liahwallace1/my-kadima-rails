@@ -1,5 +1,13 @@
 class GamesController < ApplicationController
 
+  def index
+    if params[:user_id]
+      @games = User.find(params[:user_id]).games
+    else
+      @games = Game.all
+    end
+  end
+   
   def show
     set_game
     if !logged_in?
@@ -37,7 +45,7 @@ class GamesController < ApplicationController
   end
 
   def game_params
-    params.require(:game).permit(:total_volley, :turf, :distance, :game_type, :location_id, :played_with)
+    params.require(:game).permit(:volley_total, :distance, :game_type, :location_id, :played_with)
   end
 
 end

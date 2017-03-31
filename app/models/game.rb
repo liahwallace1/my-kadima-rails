@@ -10,15 +10,16 @@ class Game < ApplicationRecord
    if date_played.present? && date_played > Date.today
      errors.add(:date_played, "can't be in the future")
    end
+ end
 
   def played_with=(new_players)
-    self.players = new_players.split(',').map do |name|
+    self.players=new_players.split(',').map do |name|
       User.find_by(username: username.strip)
     end.compact
   end
 
   def played_with
-    self.players.map {|p| p.username }.join.(', ')
+    self.players.map{|p| p.username }.join.(', ')
   end
 
 end
