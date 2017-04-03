@@ -7,7 +7,7 @@ class GamesController < ApplicationController
       @games = Game.all
     end
   end
-   
+
   def show
     set_game
     if !logged_in?
@@ -20,10 +20,11 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.new(game_params)
+    @game.date_played = Date.new(params[:game]["date_played(1i)"].to_i, params[:game]["date_played(2i)"].to_i, params[:game]["date_played(3i)"].to_i)
     if @game.save
       redirect_to game_path(@game)
     else
-      flash[:message] = @game.errors.full_messages.uniq.join(', ')
+      flash[:error] = @game.errors.full_messages.uniq.join(', ')
       render :new
     end
   end
@@ -45,7 +46,7 @@ class GamesController < ApplicationController
   end
 
   def game_params
-    params.require(:game).permit(:volley_total, :distance, :game_type, :location_id, :played_with)
+    params.require(:game).permit(:date_played, :volley_total, :distance, :game_type, :location_id, :played_with)
   end
 
 end

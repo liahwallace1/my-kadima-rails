@@ -1,15 +1,15 @@
 <%= form_for game do |f| %>
-  <%= f.label "Date of Game" %>
-  <%= f.text_field :date_played %><br>
-  <%= f.label "Number of Consecutive Volleys" %>
+  <%= f.label :date_played %>
+  <%= f.date_select(:date_played, :order => [:month, :day, :year]) %><br>
+  <%= f.label :volley_total, "Number of Consecutive Volleys" %>
   <%= f.text_field :volley_total %><br>
-  <%= f.label "Location" %>
+  <%= f.label :location_id, "Location" %>
   <%= f.select(:location_id, Location.all.collect {|l| [l.name, l.id]}) %><br>
-  <%= f.label "Type of Game" %>
+  <%= f.label :game_type %>
   <%= f.select(:game_type, game_type_options.collect {|g| [g, g]}) %><br>
-  <%= f.label "List Players by Username" %>
-  <%= f.text_area :played_with %>
-  <%= f.label "Distance (short < 7ft, long > 15ft)" %>
+  <%= f.label :played_with, "List Players by Username" %>
+  <%= f.text_field :played_with %><br>
+  <%= f.label :distance, "Distance (short < 7ft, long > 15ft)" %>
   <%= f.select(:distance, distance_options.collect {|d| [d, d]}) %><br>
   <%= f.submit %>
 <% end %>

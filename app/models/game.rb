@@ -6,7 +6,7 @@ class Game < ApplicationRecord
   validates_presence_of :date_played, :distance, :game_type, :volley_total
   validate :date_played_cannot_be_in_the_future
 
-  before_save :user_is_player
+  # before_save :user_is_player
 
   def date_played_cannot_be_in_the_future
    if date_played.present? && date_played > Date.today
@@ -24,10 +24,10 @@ class Game < ApplicationRecord
     players.map{|p| p.username }.join.(', ') if save
   end
 
-  def user_is_player
-    if user && !players.include?(user)
-      players << user
-    end
-  end
+  # def user_is_player
+  #   if user && !players.include?(user)
+  #     players << user
+  #   end
+  # end
 
 end
