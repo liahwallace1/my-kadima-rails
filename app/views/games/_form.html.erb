@@ -4,6 +4,11 @@
   <%= f.label :volley_total, "Number of Consecutive Volleys" %>
   <%= f.text_field :volley_total %><br>
   <%= f.label :location_id, "Location" %>
+  <!-- <datalist id="locations_autocomplete">
+    <%= Location.all.each do |location| %>
+      <option value="<%= location.name %>">
+    <% end %>
+  </datalist> -->
   <%= f.select(:location_id, Location.all.collect {|l| [l.name, l.id]}) %><br>
   <%= f.label :game_type %>
   <%= f.select(:game_type, game_type_options.collect {|g| [g, g]}) %><br>
