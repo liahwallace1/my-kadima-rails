@@ -5,10 +5,10 @@
   <%= f.text_field :volley_total %><br>
   <%= f.label "Location" %>
   <%= f.select(:location_id, Location.all.collect {|l| [l.name, l.id]}) %><br>
-  <%= f.label "game_type" %>
+  <%= f.label "Type of Game" %>
   <%= f.select(:game_type, game_type_options.collect {|g| [g, g]}) %><br>
   <%= f.label "List Players by Username" %>
-  <%= f.text_area "played_with" %>
+  <%= f.text_area :played_with %>
   <%= f.label "Distance (short < 7ft, long > 15ft)" %>
   <%= f.select(:distance, distance_options.collect {|d| [d, d]}) %><br>
   <%= f.submit %>
