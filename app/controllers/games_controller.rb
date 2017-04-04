@@ -17,7 +17,6 @@ class GamesController < ApplicationController
   end
 
   def create
-    raise params.inspect
     location = Location.find_or_create_by(name: params[:game][:location])
     @game = Game.create(game_params)
     @game.location_id = location.id
@@ -40,6 +39,9 @@ class GamesController < ApplicationController
   def update
     set_game
     @user.update(game_params)
+    @game.location_id = Location.find_or_create_by(name: params[:game][:location])
+    @game.played_with = params[:game][:played_with]
+    @game.save
     redirect_to game_path(@game)
   end
 

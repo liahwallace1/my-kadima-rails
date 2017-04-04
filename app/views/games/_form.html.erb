@@ -7,7 +7,7 @@
   <%= f.text_field :location, list: 'locations_autocomplete' %>
   <datalist id="locations_autocomplete">
     <% Location.all.each do |location| %>
-      <option value="<%= location.name %>">
+      <option value="<%= location.name %>"><%= location.city %>, <%= location.state %></option>
     <% end %>
   </datalist><br><br>
   <!-- <%= f.select(:location_id, Location.all.collect {|l| [l.name, l.id]}) %><br> -->
