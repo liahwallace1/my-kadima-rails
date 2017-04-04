@@ -17,7 +17,10 @@ class GamesController < ApplicationController
   end
 
   def create
+    raise params.inspect
+    location = Location.find_or_create_by(name: params[:game][:location])
     @game = Game.create(game_params)
+    @game.location_id = location.id
     @game.date_played = Date.new(params[:game]["date_played(1i)"].to_i, params[:game]["date_played(2i)"].to_i, params[:game]["date_played(3i)"].to_i)
     if @game.save
       @game.played_with = params[:game][:played_with]
@@ -57,7 +60,7 @@ class GamesController < ApplicationController
   end
 
   def game_params
-    params.require(:game).permit(:date_played, :volley_total, :distance, :game_type, :location_id)
+    params.require(:game).permit(:date_played, :volley_total, :distance, :game_type)
   end
 
 end

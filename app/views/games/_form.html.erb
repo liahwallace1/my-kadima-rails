@@ -1,20 +1,21 @@
 <%= form_for game do |f| %>
   <%= f.label :date_played %>
-  <%= f.date_select(:date_played, :order => [:month, :day, :year]) %><br>
+  <%= f.date_select(:date_played, :order => [:month, :day, :year]) %><br><br>
   <%= f.label :volley_total, "Number of Consecutive Volleys" %>
-  <%= f.text_field :volley_total %><br>
-  <%= f.label :location_id, "Location" %>
-  <!-- <datalist id="locations_autocomplete">
-    <%= Location.all.each do |location| %>
+  <%= f.text_field :volley_total %><br><br>
+  <%= f.label :location, "Location" %>
+  <%= f.text_field :location, list: 'locations_autocomplete' %>
+  <datalist id="locations_autocomplete">
+    <% Location.all.each do |location| %>
       <option value="<%= location.name %>">
     <% end %>
-  </datalist> -->
-  <%= f.select(:location_id, Location.all.collect {|l| [l.name, l.id]}) %><br>
+  </datalist><br><br>
+  <!-- <%= f.select(:location_id, Location.all.collect {|l| [l.name, l.id]}) %><br> -->
   <%= f.label :game_type %>
-  <%= f.select(:game_type, game_type_options.collect {|g| [g, g]}) %><br>
+  <%= f.select(:game_type, game_type_options.collect {|g| [g, g]}) %><br><br>
   <%= f.label :played_with, "List Players by Username" %>
-  <%= f.text_field :played_with %><br>
+  <%= f.text_field :played_with %><br><br>
   <%= f.label :distance, "Distance (short < 7ft, long > 15ft)" %>
-  <%= f.select(:distance, distance_options.collect {|d| [d, d]}) %><br>
+  <%= f.select(:distance, distance_options.collect {|d| [d, d]}) %><br><br>
   <%= f.submit %>
 <% end %>
