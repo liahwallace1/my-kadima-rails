@@ -5,6 +5,12 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+#access OAuth protocols
+gem 'omniauth'
+#access OAuth for Facebook
+gem 'omniauth-facebook'
+#figaro to store Omniauth provider keys
+gem 'figaro'
 #bcrypt for secure password
 gem 'bcrypt'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
