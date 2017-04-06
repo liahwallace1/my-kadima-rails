@@ -4,10 +4,10 @@
   <%= f.label :city %>
   <%= f.text_field :city %><br>
   <%= f.label :state %>
-  <%= f.select(:state, state_array.collect {|s| [s, s]}) %><br>
+  <%= f.select(:state, state_array.collect {|s| [s, s]}, :include_blank => true) %><br>
   <%= f.label "Check if this location has lighting at night: " %>
   <%= f.check_box :lighting %><br>
   <%= f.label :turf %>
-  <%= f.select(:turf, turf_options.collect {|t| [t, t]}) %><br>
+  <%= f.select(:turf, turf_options.collect {|t| [t, t]}, :include_blank => true) %><br>
   <%= f.submit %>
 <% end %>
