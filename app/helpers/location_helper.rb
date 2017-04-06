@@ -8,4 +8,10 @@ module LocationHelper
     %w(clay concrete grass sand other)
   end
 
+  def edit_message(location)
+    if location.city.blank? || location.state.blank? || location.turf.blank?
+      "This location needs additional information."
+    end
+  end
+
 end

@@ -3,6 +3,7 @@ Kadima Locations
 <ul>
 <% @locations.each do |location| %>
   <li><strong><%= link_to location.name, location_path(location) %></strong><br>
-    <%= location.city %>, <%= location.state %></li>
+    <%= location.city %>, <%= location.state %><br>
+    <%= link_to "Edit", edit_location_path(location), class: "btn btn-xs btn-default" %>  <%= edit_message(location) %></li>
 <% end %>
 </ul>
