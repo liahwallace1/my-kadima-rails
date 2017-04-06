@@ -1,6 +1,9 @@
 <div>
   <h3 class="text-center">Welcome to My Kadima - your Kadima game tracker!</h3>
-  <p class="text-center"><%= link_to "Log In", login_path, class: "btn btn-primary" %> OR <%= link_to "Sign Up", new_user_path, class: "btn btn-primary" %><p>
+
+  <% if !logged_in? %>
+    <p class="text-center"><%= link_to "Log In", login_path, class: "btn btn-primary" %> OR <%= link_to "Sign Up", new_user_path, class: "btn btn-primary" %><p>
+  <% end %>
 </div>
 
 <div>

@@ -1,5 +1,9 @@
 games Index page with stats
 
+<% if @games.empty? %>
+  <%= "No games." %>
+<% end %>
+
 <% @games.each do |game| %>
 <p><%= link_to "game", game_path(game) %></p>
 <% end %>

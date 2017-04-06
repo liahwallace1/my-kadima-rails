@@ -8,14 +8,16 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true
   validates :password, length: {in: 8..24}
+  validates_confirmation_of :password
 
   ## METHOD FOR OMNIAUTH
 
   def self.find_or_create_by_omniauth(auth_hash)
     self.where(:uid => auth_hash["uid"]).first_or_create do |user|
       user.username = auth_hash["info"]["name"]
-      user.email = "#{auth['uid']}@#{auth['provider']}.com"
+      user.email = "#{auth_hash["uid"]}@#{auth_hash["provider"]}.com"
       user.password = SecureRandom.hex
+      user.password_confirmation = user.password
     end
   end
 
