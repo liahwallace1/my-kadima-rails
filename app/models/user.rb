@@ -24,21 +24,21 @@ class User < ApplicationRecord
   ## METHODS FOR GAME STATS
 
   def high_score_single
+    self.games.where("game_type=?", "one-on-one").limit(1).order("volley_count desc")
   end
 
   def high_score_group
+    self.games.where("game_type=?", "multi-player").limit(1).order("volley_count desc")
   end
 
   def best_partner
-  end
-
-  def best_group
   end
 
   def frequent_partner
   end
 
   def frequent_location
+    self.
   end
 
 end
