@@ -1,5 +1,29 @@
-games Index page with stats
+<br>
+<br>
+<h3><%= current_user.username %>'s Games</h3>
 
-<% @games.each do |game| %>
-<p><%= link_to "game", game_path(game) %></p>
-<% end %>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Game Type</th>
+        <th>Distance</th>
+        <th>Volley Count</th>
+        <th>Players</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @games.each do |game| %>
+
+        <tr data-link="<%= game_path(game) %>">
+          <td><%= link_to date_formatted(game), game_path(game) %></td>
+          <td><%= link_to game.game_type, game_path(game) %></td>
+          <td><%= link_to game.distance, game_path(game) %></td>
+          <td><%= link_to game.volley_total, game_path(game) %></td>
+          <td><%= link_to game.player_names, game_path(game) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

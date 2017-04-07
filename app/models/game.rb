@@ -44,4 +44,8 @@ class Game < ApplicationRecord
 
   ## SCOPE METHODS FOR STATS ##
 
+  def player_names
+    self.players.pluck(:username).join(", ")
+  end
+
 end

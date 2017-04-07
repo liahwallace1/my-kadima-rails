@@ -12,10 +12,10 @@
   </datalist><br><br>
   <!-- <%= f.select(:location_id, Location.all.collect {|l| [l.name, l.id]}) %><br> -->
   <%= f.label :game_type %>
-  <%= f.select(:game_type, game_type_options.collect {|g| [g, g]}) %><br><br>
+  <%= f.select(:game_type, game_type_options.collect {|g| [g, g]}, :include_blank => true) %><br><br>
   <%= f.label :played_with, "List Players by Username" %>
   <%= f.text_field :played_with %><br><br>
   <%= f.label :distance, "Distance (short < 7ft, long > 15ft)" %>
-  <%= f.select(:distance, distance_options.collect {|d| [d, d]}) %><br><br>
+  <%= f.select(:distance, distance_options.collect {|d| [d, d]}, :include_blank => true) %><br><br>
   <%= f.submit %>
 <% end %>

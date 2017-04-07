@@ -12,4 +12,8 @@ module GameHelper
     %w(1 2 3).map {|d| date_hash["date_played(#{d}i)"].to_i }
   end
 
+  def date_formatted(game)
+    game.date_played.strftime("%m/%d/%Y")
+  end
+
 end
