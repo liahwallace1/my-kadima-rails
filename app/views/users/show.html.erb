@@ -4,12 +4,12 @@
 
 <h3>Your Stats:</h3>
 
-<p><strong>High Score for One-on-One Game: <strong><%= @user.high_score_single %> volleys with Player <%= @user.best_partner %></p><br>
+<p><strong>High Score for One-on-One Game: </strong><%= @user.high_score_single_score %> volleys with Player <%= @user.high_score_single_partner %></p><br>
 
-<p><strong>High Score for Group Game: <strong><%= @user.high_score_group %> volleys with Players <%= @user.best_group %></p><br>
+<p><strong>High Score for Group Game: </strong><%= @user.high_score_group_score %> volleys with Players <%= @user.high_score_group_partners %></p><br>
 
-<p><strong>Number of Games: <strong><%= @user.games.count %></p><br>
+<p><strong>Number of Games: </strong><%= @user.games.count %></p><br>
 
-<p><strong>Favorite Partner: <strong><%= @user.frequent_partner %></p><br>
+<p><strong>Favorite Partner: </strong><%= @user.frequent_partner_name %></p><br>
 
-<p><strong>Favorite Location: <strong><%= @user.frequent_location %></p><br>
+<p><strong>Favorite Location: </strong><%= @user.frequent_location_name %></p><br>
