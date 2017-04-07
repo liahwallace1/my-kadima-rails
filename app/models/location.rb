@@ -15,7 +15,8 @@ class Location < ApplicationRecord
   end
 
   def self.favorite_by_player(player)
-    includes(games: :players).where(player: {id: player.id})
+    self.where(players: {id: player.id}).select("locations.*, COUNT(players.id) AS p_count").includes(games: :players).group("locations.id").order("p_count DESC").limit(1)
+  end
 
   ## INSTANCE METHODS
 
