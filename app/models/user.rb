@@ -68,6 +68,5 @@ class User < ApplicationRecord
   def game_number(game)
     number = self.games.index(game) + 1
     number.ordinalize
-  end
 
 end

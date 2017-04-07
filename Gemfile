@@ -5,11 +5,12 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+
 #omniauth to use OAuth protocol
 gem 'omniauth'
 #omniauth-facebook to login with facebook
 gem 'omniauth-facebook'
-#figaro to save Authentication codes
+#figaro to store Omniauth provider keys
 gem 'figaro'
 #bcrypt for secure password
 gem 'bcrypt'

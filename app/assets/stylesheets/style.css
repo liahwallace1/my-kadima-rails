@@ -10,7 +10,7 @@
 }
 
 .facebook-login {
+  display: block;
   max-width: 250px;
   margin: auto;
-  align: center;
 }
