@@ -16,22 +16,22 @@ Location.create(name: "Allen Park", city: "Charleston", state: "SC", lighting: f
 Location.create(name: "Edisto Beach", city: "Edisto", state: "SC", lighting: false, turf: "sand")
 
 game1 = Game.create(date_played: Date.new(2017, 2, 3), distance: "medium", game_type: "one-on-one", volley_total: 45)
-game1.players = "Sara, Jenna"
+game1.played_with = "Sara, Jenna"
 game2 = Game.create(date_played: Date.new(2017, 2, 23), distance: "short", game_type: "one-on-one", volley_total: 22)
-game2.players = "Sara, Dan"
+game2.played_with = "Sara, Dan"
 game3 = Game.create(date_played: Date.new(2017, 3, 13), distance: "long", game_type: "one-on-one", volley_total: 34)
-game3.players = "Liah, Jenna"
+game3.played_with = "Liah, Jenna"
 game4 = Game.create(date_played: Date.new(2017, 4, 2), distance: "medium", game_type: "one-on-one", volley_total: 49)
-game4.players = "Rob, Dave"
+game4.played_with = "Rob, Dave"
 game5 = Game.create(date_played: Date.new(2017, 4, 1), distance: "short", game_type: "one-on-one", volley_total: 26)
-game5.players = "Anna, Dan"
+game5.played_with = "Anna, Dan"
 game6 = Game.create(date_played: Date.new(2017, 3, 7), distance: "medium", game_type: "multi-player", volley_total: 54)
-game6.players = "Sara, Jenna, Dan, Liah"
+game6.played_with = "Sara, Jenna, Dan, Liah"
 game7 = Game.create(date_played: Date.new(2017, 3, 17), distance: "short", game_type: "multi-player", volley_total: 31)
-game7.players = "Sara, Jenna, Anna, Liah"
+game7.played_with = "Sara, Jenna, Anna, Liah"
 game8 = Game.create(date_played: Date.new(2017, 3, 20), distance: "long", game_type: "multi-player", volley_total: 60)
-game8.players = "Sara, Dan, Rob"
+game8.played_with = "Sara, Dan, Rob"
 game9 = Game.create(date_played: Date.new(2017, 2, 26), distance: "medium", game_type: "multi-player", volley_total: 18)
-game9.players = "Dave, Jenna, Liah"
+game9.played_with = "Dave, Jenna, Liah"
 game10 = Game.create(date_played: Date.new(2017, 4, 5), distance: "short", game_type: "multi-player", volley_total: 34)
-game10.players = "Dan, Jenna, Sara, Rob, Dave, Liah, Anna"
+game10.played_with = "Dan, Jenna, Sara, Rob, Dave, Liah, Anna"

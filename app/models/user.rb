@@ -24,25 +24,35 @@ class User < ApplicationRecord
   ## METHODS FOR GAME STATS
 
   def high_score_single
-    self.games.where("game_type=?", "one-on-one").limit(1).order("volley_count desc")
+    game = self.games.where("game_type=?", "one-on-one").order("volley_total desc").limit(1)
+    game.pluck(:volley_total)[0]
   end
 
   def high_score_group
-    self.games.where("game_type=?", "multi-player").limit(1).order("volley_count desc")
+    game = self.games.where("game_type=?", "multi-player").order("volley_total desc").limit(1)
+    game.pluck(:volley_total)[0]
   end
 
-  def best_partner
-    self.high_score_single.played_with.username
+  def best_partner_name
+    self.high_score_single[0].players.where.not(id: self.id).pluck(:username)[0]
   end
 
-  def frequent_partner
-
+  def frequent_partner_name
+    player_array = self.games.map { |game| game.players.where.not(id: self.id).pluck(:username)}
+    player_array.flatten!
+    freq = player_array.inject(Hash.new(0)) {|k, v| k[v] += 1; k }
+    player_array.max_by { |v| freq[v]}
   end
 
-  def frequent_location
-    #find the number of games played at each location for the user
-    #sort by that and return location with highest number_of_games
-    self.games.sort_by {|game| }
+
+#the dumb way
+  def frequent_location_name
+    location_hash = Hash[Location.all.collect { |loc| [loc.id, []]}]
+    self.games.each do |game|
+      location_hash[game.location_id]<<game
+    end
+    location_hash.sort_by {|k, v| v.count}.reverse!
+    Location.find(location_hash.keys[0]).name
   end
 
 end
