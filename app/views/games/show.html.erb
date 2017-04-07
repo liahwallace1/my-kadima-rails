@@ -12,3 +12,6 @@
   <li><strong>Distance: </strong><%= @game.distance %></li>
   <li><strong>Players: </strong><%= @game.player_names %></li>
 </ul>
+<br>
+<br>
+<p><%= link_to "Edit Game", edit_game_path(@game), :class => "btn btn-primary" %>  <%= link_to "See My Games", user_games_path(current_user), :class => "btn btn-primary" %><p>
