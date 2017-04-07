@@ -1,5 +1,14 @@
-Game show page
+<br>
+<br>
+<h3>Game Data</h3>
 
-<% @game.players.each do |player| %>
-  <p><%= player.username %></p>
-<% end %>
+<p>This was your <%= current_user.game_number(@game) %> game with MyKadima!</p>
+
+<ul>
+  <li><strong>Date Played: </strong><%= date_formatted(@game) %></li>
+  <li><strong>Volley Total: </strong><%= @game.volley_total %></li>
+  <li><strong>Location: </strong><%= @game.location.name %></li>
+  <li><strong>Game Type: </strong><%= @game.game_type %></li>
+  <li><strong>Distance: </strong><%= @game.distance %></li>
+  <li><strong>Players: </strong><%= @game.player_names %></li>
+</ul>

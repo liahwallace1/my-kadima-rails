@@ -65,4 +65,9 @@ class User < ApplicationRecord
     Location.find(location_hash.keys[0]).name
   end
 
+  def game_number(game)
+    number = self.games.index(game) + 1
+    number.ordinalize
+  end
+
 end

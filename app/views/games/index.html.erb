@@ -16,7 +16,7 @@
     <tbody>
       <% @games.each do |game| %>
 
-        <tr data-link="<%= game_path(game) %>">
+        <tr class="clickable-row" data-href="<%= game_path(game) %>">
           <td><%= link_to date_formatted(game), game_path(game) %></td>
           <td><%= link_to game.game_type, game_path(game) %></td>
           <td><%= link_to game.distance, game_path(game) %></td>
