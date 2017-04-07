@@ -8,4 +8,10 @@ module LocationHelper
     %w(clay concrete grass sand other)
   end
 
+  def info_needed(location)
+    if location.city.blank? || location.state.blank? || location.turf.blank?
+      "This location needs to be updated."
+    end
+  end
+
 end
