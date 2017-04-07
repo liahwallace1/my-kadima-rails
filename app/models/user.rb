@@ -24,17 +24,21 @@ class User < ApplicationRecord
   ## METHODS FOR GAME STATS
 
   def high_score_single
-    game = self.games.where("game_type=?", "one-on-one").order("volley_total desc").limit(1)
-    game.pluck(:volley_total)[0]
+    self.games.where("game_type=?", "one-on-one").order("volley_total desc").limit(1)
   end
+
+  #to get actual score: self.high_score_single.pluck(:volley_total)[0]
 
   def high_score_group
-    game = self.games.where("game_type=?", "multi-player").order("volley_total desc").limit(1)
-    game.pluck(:volley_total)[0]
+    self.games.where("game_type=?", "multi-player").order("volley_total desc").limit(1)
   end
 
-  def best_partner_name
+  def high_score_single_partner
     self.high_score_single[0].players.where.not(id: self.id).pluck(:username)[0]
+  end
+
+  def high_score_group_partners
+    self.high_score_group[0].players.where.not(id: self.id).pluck(:username).to_sentence
   end
 
   def frequent_partner_name
