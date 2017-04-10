@@ -1,29 +1,27 @@
-<div class="main-content">
-  <h1><%= @user.username %>'s Player Profile</h1>
+<h3><%= @user.username %>'s Player Profile</h3>
 
 
-  <%= link_to "Add a New Game", new_user_game_path(@user), :class => "btn btn-primary" %>
-  <br>
+<%= link_to "Add a New Game", new_user_game_path(@user), :class => "btn btn-primary" %>
+<br>
 
-  <h3>Your Stats:</h3>
+<h3>Your Stats:</h3>
 
-  <p><strong>High Score for One-on-One Game: </strong>
-    <% if single_game_exist? %>
-      <%= @user.high_score_single_score %> volleys with Player <%= @user.high_score_single_partner %></p><br>
-    <% else %>
-      <% "No one-on-one games yet!" %>
-    <% end %>
+<p><strong>High Score for One-on-One Game: </strong>
+  <% if single_game_exist? %>
+    <%= @user.high_score_single_score %> volleys with Player <%= @user.high_score_single_partner %></p><br>
+  <% else %>
+    <% "No one-on-one games yet!" %>
+  <% end %>
 
-  <p><strong>High Score for Group Game: </strong>
-    <% if multi_game_exist? %>
-      <%= @user.high_score_single_score %> volleys with Player <%= @user.high_score_single_partner %></p><br>
-    <% else %>
-      <% "No multi-player games yet!" %>
-    <% end %>
+<p><strong>High Score for Group Game: </strong>
+  <% if multi_game_exist? %>
+    <%= @user.high_score_single_score %> volleys with Player <%= @user.high_score_single_partner %></p><br>
+  <% else %>
+    <% "No multi-player games yet!" %>
+  <% end %>
 
-  <p><strong>Number of Games: </strong><%= @user.games.count %></p><br>
+<p><strong>Number of Games: </strong><%= @user.games.count %></p><br>
 
-  <p><strong>Favorite Partner: </strong><%= @user.frequent_partner_name %></p><br>
+<p><strong>Favorite Partner: </strong><%= @user.frequent_partner_name %></p><br>
 
-  <p><strong>Favorite Location: </strong><%= @user.frequent_location_name %></p><br>
-</div>
+<p><strong>Favorite Location: </strong><%= @user.frequent_location_name %></p><br>

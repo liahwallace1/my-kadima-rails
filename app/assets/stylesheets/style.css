@@ -14,3 +14,9 @@
   max-width: 250px;
   margin: auto;
 }
+
+.main-content {
+  margin-top: 50px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
