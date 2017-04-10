@@ -9,9 +9,10 @@
   </head>
 
   <body>
-    <%= render 'layouts/nav'%>
-    <%= render 'layouts/messages' %>
-    <br>
+    <%= render 'layouts/nav' %>
+    <div class="messages">
+      <%= render 'layouts/messages' %>
+    </div>
     <div class="main-content">
       <%= yield %>
     </div>

@@ -25,9 +25,9 @@ class GamesController < ApplicationController
       @game.played_with = params[:game][:played_with]
       creator_is_player
       @game.save
-      redirect_to game_path(@game)
+      redirect_to game_path(@game), notice: "Game successfully created."
     else
-      flash[:error] = @game.errors.full_messages.uniq.join(', ')
+      flash[:error] = @game.errors.full_messages.uniq.join('; ')
       render :new
     end
   end
@@ -42,7 +42,7 @@ class GamesController < ApplicationController
     @game.location_id = Location.find_or_create_by(name: params[:game][:location])
     @game.played_with = params[:game][:played_with]
     @game.save
-    redirect_to game_path(@game)
+    redirect_to game_path(@game), notice: "Game successfully updated."
   end
 
   private

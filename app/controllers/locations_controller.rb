@@ -14,9 +14,9 @@ class LocationsController < ApplicationController
   def create
     @location = Location.new(location_params)
     if @location.save
-      redirect_to location_path(@location)
+      redirect_to location_path(@location), notice: "Location successfully created."
     else
-      flash[:message] = @location.errors.full_messages.uniq.join(', ')
+      flash[:error] = @location.errors.full_messages.uniq.join('; ')
       render :new
     end
   end
@@ -28,7 +28,7 @@ class LocationsController < ApplicationController
   def update
     set_location
     @location.update(location_params)
-    redirect_to location_path(@location)
+    redirect_to location_path(@location), notice: "Location successfully updated."
   end
 
   private

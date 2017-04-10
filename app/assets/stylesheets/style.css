@@ -15,6 +15,10 @@
   margin: auto;
 }
 
+.messages {
+  margin-top: 75px;
+}
+
 .main-content {
   margin-top: 50px;
   margin-left: 50px;
