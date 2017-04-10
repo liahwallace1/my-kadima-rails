@@ -18,6 +18,7 @@ class User < ApplicationRecord
       user.email = "#{auth_hash["uid"]}@#{auth_hash["provider"]}.com"
       user.password = SecureRandom.hex
       user.password_confirmation = user.password
+      user.save!
     end
   end
 
@@ -68,6 +69,6 @@ class User < ApplicationRecord
   def game_number(game)
     number = self.games.index(game) + 1
     number.ordinalize
-  end 
+  end
 
 end
