@@ -1,4 +1,4 @@
-<h3><%= @user.username %>'s Player Profile</h3>
+<h3><%= @user.username %>'s Player Profile</h3><br>
 
 
 <%= link_to "Add a New Game", new_user_game_path(@user), :class => "btn btn-primary" %>
@@ -15,7 +15,7 @@
 
 <p><strong>High Score for Group Game: </strong>
   <% if multi_game_exist? %>
-    <%= @user.high_score_single_score %> volleys with Player <%= @user.high_score_single_partner %></p><br>
+    <%= @user.high_score_group_score %> volleys with Players <%= @user.high_score_group_partners %></p><br>
   <% else %>
     <%= "No multi-player games yet!" %></p><br>
   <% end %>

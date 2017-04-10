@@ -16,7 +16,7 @@ class User < ApplicationRecord
     self.where(:uid => auth_hash["uid"]).first_or_create do |user|
       user.username = auth_hash["info"]["name"]
       user.email = "#{auth_hash["uid"]}@#{auth_hash["provider"]}.com"
-      user.password = SecureRandom.hex
+      user.password = SecureRandom.hex(8)
       user.password_confirmation = user.password
       user.save!
     end
@@ -56,14 +56,10 @@ class User < ApplicationRecord
   end
 
 
-#the dumb way
   def frequent_location_name
-    location_hash = Hash[Location.all.collect { |loc| [loc.id, []]}]
-    self.games.each do |game|
-      location_hash[game.location_id]<<game
-    end
-    location_hash.sort_by {|k, v| v.count}.reverse!
-    Location.find(location_hash.keys[0]).name
+    location_array = self.games.map { |game| game.location.name }
+    freq = location_array.inject(Hash.new(0)) {|k, v| k[v] += 1; k }
+    location_array.max_by { |v| freq[v]}
   end
 
   def game_number(game)
