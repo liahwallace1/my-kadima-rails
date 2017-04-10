@@ -32,12 +32,12 @@ class UsersController < ApplicationController
     redirect_to user_path(@user)
   end
 
-  def destroy
-    set_user
-    @user.destroy
-    session.delete :user_id
-    redirect_to root_path, notice: "User destroyed."
-  end
+  # def destroy
+  #   set_user
+  #   @user.destroy
+  #   session.delete :user_id
+  #   redirect_to root_path, notice: "User destroyed."
+  # end
 
   private
 

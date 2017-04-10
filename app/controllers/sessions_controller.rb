@@ -14,15 +14,15 @@ class SessionsController < ApplicationController
         session[:user_id] = @user.id
         redirect_to user_path(@user)
       else
-        flash[:error] = @user.errors.full_messages.join("; ")
-        render 'sessions/new'
+        flash[:error] = "Username or password is incorrect. Please try again."
+        redirect_to login_path
       end
     end
   end
 
   def destroy
     session.delete :user_id
-    redirect_to root_path
+    redirect_to root_path, notice: "Successfully logged out."
   end
 
 end
