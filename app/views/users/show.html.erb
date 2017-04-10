@@ -10,14 +10,14 @@
   <% if single_game_exist? %>
     <%= @user.high_score_single_score %> volleys with Player <%= @user.high_score_single_partner %></p><br>
   <% else %>
-    <% "No one-on-one games yet!" %>
+    <%= "No one-on-one games yet!" %></p><br>
   <% end %>
 
 <p><strong>High Score for Group Game: </strong>
   <% if multi_game_exist? %>
     <%= @user.high_score_single_score %> volleys with Player <%= @user.high_score_single_partner %></p><br>
   <% else %>
-    <% "No multi-player games yet!" %>
+    <%= "No multi-player games yet!" %></p><br>
   <% end %>
 
 <p><strong>Number of Games: </strong><%= @user.games.count %></p><br>

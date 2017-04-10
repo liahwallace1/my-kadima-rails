@@ -11,7 +11,7 @@ class Location < ApplicationRecord
   end
 
   def self.rank_list
-    self.all.sort_by(&:number_of_games)
+    self.all.sort_by(&:number_of_games).reverse!
   end
 
   ## INSTANCE METHODS
