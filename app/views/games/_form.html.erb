@@ -17,5 +17,5 @@
   <%= f.text_field :played_with %><br><br>
   <%= f.label :distance, "Distance (short < 7ft, long > 15ft)" %>
   <%= f.select(:distance, distance_options.collect {|d| [d, d]}, :include_blank => true) %><br><br>
-  <%= f.submit %>
+  <%= f.submit :class => "btn btn-primary" %>  <%= link_to "Back to Profile", user_path(current_user), class: "btn btn-primary" %>
 <% end %>

@@ -8,6 +8,6 @@
   <%= f.label "Check if this location has lighting at night: " %>
   <%= f.check_box :lighting %><br>
   <%= f.label :turf %>
-  <%= f.select(:turf, turf_options.collect {|t| [t, t]}, :include_blank => true) %><br>
-  <%= f.submit %>
+  <%= f.select(:turf, turf_options.collect {|t| [t, t]}, :include_blank => true) %><br><br>
+  <%= f.submit :class => "btn btn-primary" %>  <%= link_to "Back to Locations", locations_path, class: "btn btn-primary" %>
 <% end %>

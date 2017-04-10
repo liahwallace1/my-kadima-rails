@@ -28,6 +28,7 @@ class Game < ApplicationRecord
    end
  end
 
+
 ## CUSTOM SETTER FOR PLAYERS ##
 
   def played_with=(player_list)

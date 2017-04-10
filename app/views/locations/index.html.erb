@@ -1,5 +1,7 @@
 <h3>Kadima Locations</h3>
 <br>
+<%= link_to "Add a Location", new_location_path, :class => "btn btn-primary" %>
+<br><br><br>
 <ul>
 <% @locations.each do |location| %>
   <li><strong><%= link_to location.name, location_path(location) %></strong><br>
