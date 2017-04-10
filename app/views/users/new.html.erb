@@ -1,5 +1,9 @@
 <h3 class="text-center">Sign Up to your MyKadima account:</h3>
 
 <%= render 'form' %>
+<h5 class="text-center">OR</h5>
+<%= link_to '/auth/facebook' do %>
+  <%= image_tag "/assets/facebook_login.png", class: "facebook-login" %>
+<% end %>
 <br>
 <p class="text-center">Already have an account? <%= link_to(controller: 'sessions', action: 'new') { 'Log In' } %></p>
