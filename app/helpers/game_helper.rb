@@ -1,11 +1,15 @@
 module GameHelper
 
   def distance_options
-    %w(short medium long)
+    %w(short medium long).collect {|d| [d, d]}
   end
 
   def game_type_options
-    %w(one-on-one multi-player)
+    %w(one-on-one multi-player).collect {|g| [g, g]}
+  end
+
+  def location_options
+    Location.all.collect { |l| ["#{l.name}, #{l.city}, #{l.state}", l.id] }
   end
 
   def set_date_from_inputs(date_hash)

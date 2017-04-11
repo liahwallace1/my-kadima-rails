@@ -1,21 +1,50 @@
 <%= form_for game do |f| %>
+
   <%= f.label :date_played %>
   <%= f.date_select(:date_played, :order => [:month, :day, :year]) %><br><br>
+
   <%= f.label :volley_total, "Number of Consecutive Volleys" %>
   <%= f.text_field :volley_total %><br><br>
-  <%= f.label :location, "Location" %>
-  <%= f.text_field :location, list: 'locations_autocomplete' %>
-  <datalist id="locations_autocomplete">
-    <% Location.all.each do |location| %>
-      <option value="<%= location.name %>"><%= location.city %>, <%= location.state %></option>
+
+  <%= f.label :location_id, "Select Location" %>
+  <%= f.select(:location_id, location_options, :include_blank => true) %><br>
+  <h4>OR</h4>
+    <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseLocationForm" aria-expanded="false" aria-controls="collapseLocationForm">
+    Add a New Location
+  </a><br>
+  <div class="collapse" id="collapseLocationForm">
+  <div class="well">
+    <%= f.fields_for :location do |loc| %>
+      <%= loc.label :name %>
+      <%= loc.text_field :name %><br>
+      <%= loc.label :city %>
+      <%= loc.text_field :city %><br>
+      <%= loc.label :state %>
+      <%= loc.select(:state, state_array, :include_blank => true) %><br>
+      <%= loc.label "Check if this location has lighting at night: " %>
+      <%= loc.check_box :lighting %><br>
+      <%= loc.label :turf %>
+      <%= loc.select(:turf, turf_options, :include_blank => true) %><br>
     <% end %>
-  </datalist><br><br>
+  </div>
+</div><br>
+  <!-- <%= f.label :location, "Location" %>
+  <%= f.text_field :location, list: 'locations_autocomplete' %>
+    <datalist id="locations_autocomplete">
+      <% Location.all.each do |location| %>
+        <option value="<%= location.name %>"><%= location.city %>, <%= location.state %></option>
+      <% end %>
+    </datalist><br><br> -->
   <!-- <%= f.select(:location_id, Location.all.collect {|l| [l.name, l.id]}) %><br> -->
+
   <%= f.label :game_type %>
-  <%= f.select(:game_type, game_type_options.collect {|g| [g, g]}, :include_blank => true) %><br><br>
+  <%= f.select(:game_type, game_type_options, :include_blank => true) %><br><br>
+
   <%= f.label :played_with, "List Players by Username" %>
   <%= f.text_field :played_with %><br><br>
+
   <%= f.label :distance, "Distance (short < 7ft, long > 15ft)" %>
-  <%= f.select(:distance, distance_options.collect {|d| [d, d]}, :include_blank => true) %><br><br>
+  <%= f.select(:distance, distance_options, :include_blank => true) %><br><br>
+
   <%= f.submit :class => "btn btn-primary" %>  <%= link_to "Back to Profile", user_path(current_user), class: "btn btn-primary" %>
 <% end %>

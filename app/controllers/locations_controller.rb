@@ -31,6 +31,12 @@ class LocationsController < ApplicationController
     redirect_to location_path(@location), notice: "Location successfully updated."
   end
 
+  def destroy
+    set_location
+    @location.destroy
+    redirect_to locations_path
+  end
+
   private
 
   def set_location

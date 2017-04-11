@@ -18,9 +18,10 @@ class GamesController < ApplicationController
 
   def create
     location = Location.find_or_create_by(name: params[:game][:location])
-    @game = Game.create(game_params)
+    @game = Game.new(game_params)
     @game.location_id = location.id
     @game.date_played = Date.new(params[:game]["date_played(1i)"].to_i, params[:game]["date_played(2i)"].to_i, params[:game]["date_played(3i)"].to_i)
+
     if @game.save
       @game.played_with = params[:game][:played_with]
       creator_is_player
@@ -38,11 +39,17 @@ class GamesController < ApplicationController
 
   def update
     set_game
-    @user.update(game_params)
-    @game.location_id = Location.find_or_create_by(name: params[:game][:location])
+    @game.update(game_params)
+    @game.location = Location.find_or_create_by(name: params[:game][:location])
     @game.played_with = params[:game][:played_with]
     @game.save
     redirect_to game_path(@game), notice: "Game successfully updated."
+  end
+
+  def destroy
+    set_game
+    @game.destroy
+    redirect_to user_games_path(current_user)
   end
 
   private

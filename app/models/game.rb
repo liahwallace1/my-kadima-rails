@@ -29,7 +29,12 @@ class Game < ApplicationRecord
  end
 
 
-## CUSTOM SETTER FOR PLAYERS ##
+## CUSTOM SETTERS ##
+
+  def location_attributes(location)
+    self.location = Location.find_or_create_by(name: location.name)
+    self.location.update(location)
+  end
 
   def played_with=(player_list)
     player_list.split(', ').map do |player_name|
@@ -39,7 +44,7 @@ class Game < ApplicationRecord
   end
 
   def played_with
-    players.map{|p| p.username }.join.(', ') if save
+    players.map{|p| p.username }.join(', ') if save
   end
 
 
