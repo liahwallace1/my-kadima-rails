@@ -17,7 +17,7 @@ class GamesController < ApplicationController
   end
 
   def create
-    location = Location.find_or_create_by(name: params[:game][:location])
+    location = Location.find_or_create_by(name: params[:game][:location][:name])
     @game = Game.new(game_params)
     @game.location_id = location.id
     @game.date_played = Date.new(params[:game]["date_played(1i)"].to_i, params[:game]["date_played(2i)"].to_i, params[:game]["date_played(3i)"].to_i)
