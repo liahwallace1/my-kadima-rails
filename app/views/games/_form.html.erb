@@ -6,36 +6,13 @@
   <%= f.label :volley_total, "Number of Consecutive Volleys" %>
   <%= f.text_field :volley_total %><br><br>
 
-  <%= f.label :location_id, "Select Location" %>
-  <%= f.select(:location_id, location_options, :include_blank => true) %><br>
-  <h4>OR</h4>
-    <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseLocationForm" aria-expanded="false" aria-controls="collapseLocationForm">
-    Add a New Location
-  </a><br>
-  <div class="collapse" id="collapseLocationForm">
-  <div class="well">
-    <%= f.fields_for :location do |loc| %>
-      <%= loc.label :name %>
-      <%= loc.text_field :name %><br>
-      <%= loc.label :city %>
-      <%= loc.text_field :city %><br>
-      <%= loc.label :state %>
-      <%= loc.select(:state, state_array, :include_blank => true) %><br>
-      <%= loc.label "Check if this location has lighting at night: " %>
-      <%= loc.check_box :lighting %><br>
-      <%= loc.label :turf %>
-      <%= loc.select(:turf, turf_options, :include_blank => true) %><br>
-    <% end %>
-  </div>
-</div><br>
-  <!-- <%= f.label :location, "Location" %>
+  <%= f.label :location, "Location" %>
   <%= f.text_field :location, list: 'locations_autocomplete' %>
     <datalist id="locations_autocomplete">
       <% Location.all.each do |location| %>
         <option value="<%= location.name %>"><%= location.city %>, <%= location.state %></option>
       <% end %>
-    </datalist><br><br> -->
-  <!-- <%= f.select(:location_id, Location.all.collect {|l| [l.name, l.id]}) %><br> -->
+    </datalist><br><br>
 
   <%= f.label :game_type %>
   <%= f.select(:game_type, game_type_options, :include_blank => true) %><br><br>
