@@ -9,7 +9,7 @@ MyKadima is a RoR-based application that allows users to keep track of their Kad
   - Add/View Kadima locations including important information about turf and lighting
 
 ##Video Walkthrough
-  [![IMAGE ALT TEXT](https://img.youtube.com/vi/1Jolb1kO7mQ/0.jpg)](https://youtu.be/1Jolb1kO7mQ "Boulder Buddies")
+  [![IMAGE ALT TEXT](https://i.ytimg.com/vi/eJhTa-OFdcs/1.jpg?time=1492008776620)](https://github.com/liahwallace1/my-kadima-rails "MyKadima Walkthrough")
 
 ## Installation
   Clone the repository, then execute:
