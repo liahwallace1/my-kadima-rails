@@ -40,7 +40,7 @@ class GamesController < ApplicationController
   def update
     set_game
     @game.update(game_params)
-    @game.location = Location.find_or_create_by(name: params[:game][:location])
+    @game.location = Location.find_or_create_by(name: params[:game][:location][:name])
     @game.played_with = params[:game][:played_with]
     @game.save
     redirect_to game_path(@game), notice: "Game successfully updated."

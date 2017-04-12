@@ -8,7 +8,7 @@
 
   <%= f.fields_for :location do |loc| %>
     <%= loc.label :name, "Location" %>
-      <%= loc.text_field :name, list: 'locations_autocomplete' %>
+      <%= loc.text_field :name, value: game.location.name, list: 'locations_autocomplete' %>
         <datalist id="locations_autocomplete">
           <% Location.all.each do |location| %>
             <option value="<%= location.name %>"><%= location.city %>, <%= location.state %></option>
