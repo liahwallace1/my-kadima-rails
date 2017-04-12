@@ -8,7 +8,11 @@ MyKadima is a RoR-based application that allows users to keep track of their Kad
   - See your Kadima stats such as top scores, favorite partner, and favorite location
   - Add/View Kadima locations including important information about turf and lighting
 
+<<<<<<< HEAD
 ## Video Walkthrough
+=======
+##Video Walkthrough
+>>>>>>> f9474bbccc8ab708bacce7fe6fbd9f6ff81f9c9d
   [![IMAGE ALT TEXT](http://i.imgur.com/uHsVlgW.png)](https://github.com/liahwallace1/my-kadima-rails "MyKadima Walkthrough")
 
 ## Installation

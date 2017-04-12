@@ -9,7 +9,7 @@ module GameHelper
   end
 
   def location_options
-    Location.all.collect { |l| ["#{l.name}, #{l.city}, #{l.state}", l.id] }
+    Location.all.collect { |l| ["#{l.name}, #{l.city}, #{l.state}", l.name] }
   end
 
   def set_date_from_inputs(date_hash)
