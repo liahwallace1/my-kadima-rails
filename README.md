@@ -8,11 +8,7 @@ MyKadima is a RoR-based application that allows users to keep track of their Kad
   - See your Kadima stats such as top scores, favorite partner, and favorite location
   - Add/View Kadima locations including important information about turf and lighting
 
-<<<<<<< HEAD
 ## Video Walkthrough
-=======
-##Video Walkthrough
->>>>>>> f9474bbccc8ab708bacce7fe6fbd9f6ff81f9c9d
   [![IMAGE ALT TEXT](http://i.imgur.com/uHsVlgW.png)](https://github.com/liahwallace1/my-kadima-rails "MyKadima Walkthrough")
 
 ## Installation
@@ -42,7 +38,7 @@ MyKadima is a RoR-based application that allows users to keep track of their Kad
 ### Creating a Game
 
   You can access the New Game form from your User Profile page or from the Navigation bar Games dropdown. Enter all information about your game. Make sure you enter the USERNAME of your game partners. Once you create the game, it will be added to the Games of your friends as well.
- 
+
 ### Creating a Location
   MyKadima counts on its users to enter the best location information in your area. You can create a new location by clicking "Add a New Location" in the Navigation bar Location dropdown. You can also create a new location when you create a game. If your location is not already present (name will autofill or use the dropdown), you can enter the name of your new Location, and it will be created. This location will not have all of the available location information though, so if possible, visit the location page and update the information.
 
