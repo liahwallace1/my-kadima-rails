@@ -1,4 +1,4 @@
-#Welcome to MyKadima!
+# Welcome to MyKadima!
 
 MyKadima is a RoR-based application that allows users to keep track of their Kadima games, stats, locations, and partners.
 
@@ -8,8 +8,8 @@ MyKadima is a RoR-based application that allows users to keep track of their Kad
   - See your Kadima stats such as top scores, favorite partner, and favorite location
   - Add/View Kadima locations including important information about turf and lighting
 
-##Video Walkthrough
-  [![IMAGE ALT TEXT](https://img.youtube.com/vi/1Jolb1kO7mQ/0.jpg)](https://youtu.be/1Jolb1kO7mQ "Boulder Buddies")
+## Video Walkthrough
+  [![IMAGE ALT TEXT](http://i.imgur.com/uHsVlgW.png)](https://github.com/liahwallace1/my-kadima-rails "MyKadima Walkthrough")
 
 ## Installation
   Clone the repository, then execute:
@@ -31,18 +31,18 @@ MyKadima is a RoR-based application that allows users to keep track of their Kad
   Note: *You can also use ```rackup``` then go to ```localhost:9292``` as an alternative to ```shotgun```*
   Note: *If using Learn IDE, navigate to the url given when ```shotgun``` starts*
 
-###Creating an Account
+### Creating an Account
 
   You can sign up for a MyKadima account by navigating to the Sign Up page. Here, either enter the required fields to create a user, or click the "Log in with Facebook" button.
 
-###Creating a Game
+### Creating a Game
 
   You can access the New Game form from your User Profile page or from the Navigation bar Games dropdown. Enter all information about your game. Make sure you enter the USERNAME of your game partners. Once you create the game, it will be added to the Games of your friends as well.
-
-###Creating a Location
+ 
+### Creating a Location
   MyKadima counts on its users to enter the best location information in your area. You can create a new location by clicking "Add a New Location" in the Navigation bar Location dropdown. You can also create a new location when you create a game. If your location is not already present (name will autofill or use the dropdown), you can enter the name of your new Location, and it will be created. This location will not have all of the available location information though, so if possible, visit the location page and update the information.
 
-###Updating User Information
+### Updating User Information
   You can update your username, email, and password by clicking the Update User button on your User Profile page.
 
 
