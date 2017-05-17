@@ -4,6 +4,10 @@ class GamesController < ApplicationController
   def index
     if params[:user_id]
       @games = User.find(params[:user_id]).games
+      respond_to do |f|
+        f.html
+        f.json {render json: @games}
+      end
     else
       @games = Game.all
     end

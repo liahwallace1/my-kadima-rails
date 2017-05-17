@@ -7,15 +7,15 @@
 // })
 
 // TABLE ROW AS LINK //
-jQuery(document).ready(function($) {
-    $(".clickable-row").click(function() {
-        window.location = $(this).data("href");
-    });
-});
-
-
-// NAVBAR ACTIVE class //
-$(".nav a").on("click", function(){
-   $(".nav").find(".active").removeClass("active");
-   $(this).parent().addClass("active");
-});
+// $("document").ready(function(e) {
+//     $(".clickable-row").click(function() {
+//         window.location = $(this).data("href");
+//     });
+// });
+//
+//
+// // NAVBAR ACTIVE class //
+// $(".nav a").on("click", function(){
+//    $(".nav").find(".active").removeClass("active");
+//    $(this).parent().addClass("active");
+// });
