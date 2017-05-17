@@ -6,22 +6,19 @@ const bindClickHandlers = () => {
   $(".see-games").on("click", (e) => {
     e.preventDefault();
     history.pushState(null, null, "***username***/games");
+    $('#main-content').html("")
     getGames();
+  })
+  $(document).on("click", ".clickable-row", function(e)  {
+    e.preventDefault();
+    history.pushState(null, null, "games/***gameID***");
+    $('#main-content').html("")
+    let id = $(this).attr("data-id")
+    showGame(id);
   })
 }
 
-const getGames = () => {
-  fetch(`/users/***id***/posts.json`)
-  .then((res) => res.json())
-  .then(data => {
-    $('#main-content').html("")
-    data.forEach((game) => {
-      let newGame = new Game(game)
-      let gameHTML = newGame.formatIndex()
-      $('#main-content').append(gameHTML)
-    })
-  })
-}
+//////// GAME OBJECT //////////
 
 function Game(game) {
   this.id = game.id
@@ -33,10 +30,32 @@ function Game(game) {
   this.played_with = game.played_with
 }
 
+/////// INDEX FUNCTIONS /////////
+const getGames = () => {
+  fetch(`/users/***id***/posts.json`)
+  .then((res) => res.json())
+  .then((games) => {
+    if objIsEmpty(games) {
+      noGameIndex()
+    } else {
+      displayGames(games)
+    }
+  })
+}
+
+const displayGames = (games) => {
+  let indexStatic = indexStatic()
+  $('#main-content').html(indexStatic)
+  games.forEach((game) => {
+    let newGame = new Game(game)
+    let gameHTML = newGame.formatIndex()
+    $('.game-rows').append(gameHTML)
+  })
+}
+
 Game.prototype.formatIndex = function() {
-  //can get game id for link with ${this.id}
   let gameHTML = `
-    <tr class="clickable-row" data-href="<%= game_path(game) %>">
+    <tr class="clickable-row" data-id="${this.id}">
       <td>${this.date_played}</td>
       <td>${this.location.name}</td>
       <td>${this.game_type}</td>
@@ -46,4 +65,63 @@ Game.prototype.formatIndex = function() {
     </tr>
   `
   return gameHTML
+}
+
+const indexStatic = function() {
+  let indexStatic = `
+  <h3>Your Games</h3>
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Location</th>
+            <th>Game Type</th>
+            <th>Distance</th>
+            <th>Volley Count</th>
+            <th>Players</th>
+          </tr>
+        </thead>
+        <tbody class="game-rows">
+      </table>
+    </div>
+  `
+  return indexStatic
+}
+
+const objIsEmpty(obj) {
+  for (var key in obj) {
+    if (obj.hasOwnProperty(key))
+      return false;
+  }
+  return true;
+}
+
+const noGameIndex = () => {
+  let indexStatic = `
+  <h3>Your Games</h3>
+  <div><p>No games.</p></div>
+  `
+  return indexStatic
+}
+
+
+/////////SHOW FUNCTIONS//////////
+
+const showGame = (id) => {
+
+  fetch(`/games/${id}.json`)
+  .then((res) => res.json())
+  .then(game => {
+    let newGame = new Game(game)
+    let showHTML = newGame.formatShow()
+    $('#main-content').append(showHTML)
+  })
+}
+
+Game.prototype.formatShow = function() {
+  let showHTML = `
+  <h3>Game Data</h3>
+  `
+  return showHTML
 }
