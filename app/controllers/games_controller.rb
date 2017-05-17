@@ -15,6 +15,10 @@ class GamesController < ApplicationController
 
   def show
     set_game
+    respond_to do |f|
+      f.html
+      f.json {render json: @game}
+    end
   end
 
   def new

@@ -5,21 +5,22 @@ $(() => {
 const bindClickHandlers = () => {
   $(".see-games").on("click", (e) => {
     e.preventDefault();
-    fetch(`/users/id/posts.json`)
-    .then((res) => res.json())
-    .then(data => {
-      $('#main-content').html("")
-      data.forEach((game) => {
-        let newGame = new Game(game)
-        let gameHTML = newGame.formatIndex()
-        $('#main-content').append(gameHTML)
-      })
-    })
+    history.pushState(null, null, "***username***/games");
+    getGames();
   })
 }
 
 const getGames = () => {
-  fetch()
+  fetch(`/users/***id***/posts.json`)
+  .then((res) => res.json())
+  .then(data => {
+    $('#main-content').html("")
+    data.forEach((game) => {
+      let newGame = new Game(game)
+      let gameHTML = newGame.formatIndex()
+      $('#main-content').append(gameHTML)
+    })
+  })
 }
 
 function Game(game) {
@@ -32,7 +33,8 @@ function Game(game) {
   this.played_with = game.played_with
 }
 
-Game.prototype.formatIndex = () => {
+Game.prototype.formatIndex = function() {
+  //can get game id for link with ${this.id}
   let gameHTML = `
     <tr class="clickable-row" data-href="<%= game_path(game) %>">
       <td>${this.date_played}</td>
