@@ -3,6 +3,12 @@ $(() => {
 })
 
 const bindClickHandlers = () => {
+  // $(".profile").on("click", (e) => {
+  //   e.preventDefault();
+  //   let userId = $(".profile").data("userid");
+  //   $('.main-content').html("");
+  //   history.pushState(null, null, `/users/${userId}`);
+  //   getProfile(userId);
   $(".see-games").on("click", (e) => {
     e.preventDefault();
     let userId = $(".see-games").data("userid");
@@ -25,6 +31,23 @@ const bindClickHandlers = () => {
     getNewGame(userId);
   })
 }
+
+//////// USER SHOW FUNCTIONS //////////
+
+// const getProfile = (userId) => {
+//   $.ajax({
+//     method: 'get',
+//     url: `/users/${userId}.json`,
+//     success: function(games) {
+//       if (games.length === 0) {
+//         noGameIndex()
+//       } else {
+//         displayGames(games)
+//       }
+//     }
+//   });
+// }
+
 
 //////// GAME OBJECT //////////
 
