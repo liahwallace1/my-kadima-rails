@@ -3,6 +3,7 @@ $(() => {
 })
 
 const bindClickHandlers = () => {
+  //home page
   $(".home").on("click", (e) => {
     e.preventDefault();
     let userId = $(".profile").data("userid");
@@ -10,6 +11,7 @@ const bindClickHandlers = () => {
     clearContent();
     getHome();
   });
+  // profile page
   $(".profile").on("click", (e) => {
     e.preventDefault();
     let userId = $(".profile").data("userid");
@@ -17,6 +19,7 @@ const bindClickHandlers = () => {
     clearContent();
     getProfile(userId);
   });
+  //User games index
   $(".see-games").on("click", (e) => {
     e.preventDefault();
     let userId = $(".see-games").data("userid");
@@ -24,6 +27,7 @@ const bindClickHandlers = () => {
     clearContent();
     getGames(userId);
   });
+  // Game show
   $(document).on("click", ".clickable-row", function(e)  {
     e.preventDefault();
     let url = $(this).data("href");
@@ -31,6 +35,7 @@ const bindClickHandlers = () => {
     clearContent();
     showGame(url);
   });
+  // Add game
   $(".add-game").on("click", (e) => {
     e.preventDefault();
     let userId = $(".add-game").data("userid");
@@ -38,12 +43,14 @@ const bindClickHandlers = () => {
     clearContent();
     getNewGame(userId);
   });
+  // Locations index
   $(".see-locations").on("click", (e) => {
     e.preventDefault();
     history.pushState(null, null, `/locations`);
     clearContent();
     getLocations();
   });
+  // Location show
   $(document).on("click", ".location-click", function(e)  {
     e.preventDefault();
     let url = $(this).attr("href");
@@ -51,7 +58,13 @@ const bindClickHandlers = () => {
     clearContent();
     showLocation(url);
   });
-
+  // Add location
+  $(".add-location").on("click", (e) => {
+    e.preventDefault();
+    history.pushState(null, null, `/locations/new`);
+    clearContent();
+    getNewLocation();
+  });
 }
 
 const clearContent = () => {

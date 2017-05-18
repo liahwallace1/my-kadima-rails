@@ -17,6 +17,10 @@ class LocationsController < ApplicationController
 
   def new
     @location = Location.new
+    respond_to do |f|
+      f.html
+      f.json {render json: @location}
+    end
   end
 
   def create
