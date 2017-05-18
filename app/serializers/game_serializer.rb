@@ -1,5 +1,5 @@
 class GameSerializer < ActiveModel::Serializer
-  attributes :id, :date_played, :distance, :game_type, :volley_total, :location_id, :links
+  attributes :id, :date_played, :distance, :game_type, :volley_total, :location_id, :played_with, :links
   delegate :current_user, to: :scope
 
   attribute :links do

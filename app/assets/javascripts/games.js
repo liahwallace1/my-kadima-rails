@@ -48,7 +48,7 @@ Game.prototype.formatIndex = function() {
 }
 
 const indexStatic = () => {
-  let indexStatic = `
+  let emptyTable = `
   <h3>Your Games</h3>
     <div class="table-responsive">
       <table class="table table-hover">
@@ -66,15 +66,15 @@ const indexStatic = () => {
       </table>
     </div>
   `
-  return indexStatic
+  return emptyTable
 }
 
 const noGameIndex = () => {
-  let indexStatic = `
+  let emptyTable = `
   <h3>Your Games</h3>
   <div><p>No games.</p></div>
   `
-  return indexStatic
+  return emptyTable
 }
 
 const displayGames = (games) => {
