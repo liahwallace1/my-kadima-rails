@@ -6,8 +6,8 @@ class GameSerializer < ActiveModel::Serializer
     game_id = object.id
     user_id = current_user.id
     {
-      self: "/games/#{game_id}",
-      user_games: "/users/#{user_id}/games"
+      game_url: "/games/#{game_id}",
+      user_games_url: "/users/#{user_id}/games"
     }
   end
 
