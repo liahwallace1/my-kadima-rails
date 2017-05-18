@@ -96,7 +96,6 @@ const getProfile = (userId) => {
       let newUser = new User(user)
       let profileHTML = newUser.formatProfile()
       $('.main-content').append(profileHTML)
-      displayProfile(user)
     }
   });
 }
@@ -123,7 +122,7 @@ function Game(game) {
 
 /////// USER GAMES INDEX FUNCTIONS /////////
 
-Game.prototype.formatIndex = function() {
+Game.prototype.formatGameIndex = function() {
   let gameHTML = `
     <tr class="clickable-row" data-href="/games/${this.id}">
       <td>${this.date_played}</td>
@@ -137,7 +136,7 @@ Game.prototype.formatIndex = function() {
   return gameHTML
 }
 
-const indexStatic = () => {
+const gameIndexStatic = () => {
   let emptyTable = `
   <h3>Your Games</h3>
     <div class="table-responsive">
@@ -168,11 +167,11 @@ const noGameIndex = () => {
 }
 
 const displayGames = (games) => {
-  let emptyTable = indexStatic();
+  let emptyTable = gameIndexStatic();
   $('.main-content').html(emptyTable);
   games.forEach((game) => {
     let newGame = new Game(game)
-    let gameHTML = newGame.formatIndex()
+    let gameHTML = newGame.formatGameIndex()
     $('.game-rows').append(gameHTML)
   })
 }
@@ -230,4 +229,46 @@ const newGameFormat = () => {
     <h1>New Game Form</h1>
   `
   return newGameForm
+}
+
+//////// LOCATION OBJECT //////////
+
+function Location(location) {
+  this.id = location.id
+  this.name = location.name
+  this.city = location.city
+  this.state = location.state
+  this.lighting = location.lighting
+  this.turf = location.turf
+  this.games = location.games
+}
+
+//////// LOCATION INDEX FUNCTIONS //////////
+
+const getLocations = () => {
+  $.ajax({
+    method: 'get',
+    url: `/locations.json`,
+    success: function(locations) {
+      displayLocations(locations)
+    }
+  });
+}
+
+const displayLocations = (locations) => {
+  let emptyTable = gameIndexStatic();
+  $('.main-content').html(emptyTable);
+  locations.forEach((location) => {
+    let newLocation = new Location(location)
+    let locationHTML = newLocation.formatLocationIndex()
+    $('.game-rows').append(gameHTML)
+  })
+}
+
+Location.prototype.formatLocationIndex = function() {
+  let locationIndexHTML = `
+  <h1>Locations</h1>
+  <ul>
+  `
+  return locationIndexHTML
 }
