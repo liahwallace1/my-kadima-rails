@@ -3,50 +3,63 @@ $(() => {
 })
 
 const bindClickHandlers = () => {
-  // $(".profile").on("click", (e) => {
-  //   e.preventDefault();
-  //   let userId = $(".profile").data("userid");
-  //   $('.main-content').html("");
-  //   history.pushState(null, null, `/users/${userId}`);
-  //   getProfile(userId);
+  $(".profile").on("click", (e) => {
+    e.preventDefault();
+    let userId = $(".profile").data("userid");
+    $('.main-content').html("");
+    history.pushState(null, null, `/users/${userId}`);
+    getProfile(userId);
+  });
   $(".see-games").on("click", (e) => {
     e.preventDefault();
     let userId = $(".see-games").data("userid");
     $('.main-content').html("");
     history.pushState(null, null, `/users/${userId}/games`);
     getGames(userId);
-  })
+  });
   $(document).on("click", ".clickable-row", function(e)  {
     e.preventDefault();
     let url = $(this).data("href");
     history.pushState(null, null, `${url}`);
     $('.main-content').html("");
     showGame(url);
-  })
+  });
   $(".add-game").on("click", (e) => {
     e.preventDefault();
     let userId = $(".add-game").data("userid");
     $('.main-content').html("");
     // history.pushState(null, null, `/users/${userId}/games/new`);
     getNewGame(userId);
-  })
+  });
+}
+
+//////// USER OBJECT //////////
+
+function User(game) {
+  this.id = game.id
+  this.date_played = game.date_played
+  this.distance = game.distance
+  this.game_type = game.game_type
+  this.volley_total = game.volley_total
+  this.location = game.location
+  this.played_with = game.played_with
 }
 
 //////// USER SHOW FUNCTIONS //////////
 
-// const getProfile = (userId) => {
-//   $.ajax({
-//     method: 'get',
-//     url: `/users/${userId}.json`,
-//     success: function(games) {
-//       if (games.length === 0) {
-//         noGameIndex()
-//       } else {
-//         displayGames(games)
-//       }
-//     }
-//   });
-// }
+const getProfile = (userId) => {
+  $.ajax({
+    method: 'get',
+    url: `/users/${userId}.json`,
+    success: function(user) {
+      displayProfile(user)
+    }
+  });
+}
+
+const displayProfile = (user) => {
+  $('.main-content').html("<h1>Profile</h1>")
+}
 
 
 //////// GAME OBJECT //////////
