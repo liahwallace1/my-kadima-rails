@@ -9,6 +9,10 @@ class LocationsController < ApplicationController
 
   def show
     set_location
+    respond_to do |f|
+      f.html
+      f.json {render json: @location}
+    end
   end
 
   def new

@@ -44,7 +44,7 @@ const bindClickHandlers = () => {
     clearContent();
     getLocations();
   });
-  $(document).on("click", "li a", function(e)  {
+  $(document).on("click", ".location-click", function(e)  {
     e.preventDefault();
     let url = $(this).attr("href");
     history.pushState(null, null, `${url}`);
@@ -286,7 +286,7 @@ const locationIndexStatic = () => {
 Location.prototype.formatLocationIndex = function() {
   let locationHTML = `
   <li data-id="${this.id}">
-    <a href="/locations/${this.id}"><strong>${this.name}</strong></a><br>
+    <a href="/locations/${this.id}" class="location-click"><strong>${this.name}</strong></a><br>
     ${this.city}, ${this.state}<br>
     <button class="btn btn-xs btn-default">Edit</button>
   </li><br>
