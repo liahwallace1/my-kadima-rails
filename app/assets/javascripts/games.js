@@ -38,12 +38,12 @@ const bindClickHandlers = () => {
     clearContent();
     getNewGame(userId);
   });
-  // $(".see-locations").on("click", (e) => {
-  //   e.preventDefault();
-  //   history.pushState(null, null, `/locations`);
-  //   clearContent();
-  //   getLocations();
-  // });
+  $(".see-locations").on("click", (e) => {
+    e.preventDefault();
+    history.pushState(null, null, `/locations`);
+    clearContent();
+    getLocations();
+  });
 }
 
 const clearContent = () => {
@@ -197,8 +197,8 @@ const showGame = (url) => {
     url: `${url}.json`,
     success: function(game) {
     let newGame = new Game(game);
-    let showHTML = newGame.formatShow();
-    $('.main-content').append(showHTML);
+    let gameShowHTML = newGame.formatShow();
+    $('.main-content').append(gameShowHTML);
     }
   })
 }
@@ -256,19 +256,32 @@ const getLocations = () => {
 }
 
 const displayLocations = (locations) => {
-  let emptyTable = gameIndexStatic();
-  $('.main-content').html(emptyTable);
+  let locationIndexHTML = locationIndexStatic();
+  $('.main-content').html(locationIndexHTML);
   locations.forEach((location) => {
     let newLocation = new Location(location)
     let locationHTML = newLocation.formatLocationIndex()
-    $('.game-rows').append(gameHTML)
+    $('ul.locations').append(locationHTML)
   })
 }
 
-Location.prototype.formatLocationIndex = function() {
+const locationIndexStatic = () => {
   let locationIndexHTML = `
-  <h1>Locations</h1>
-  <ul>
+  <h1>Locations</h1><br>
+  <button class="btn btn-primary add-location">Add a Location</button><br><br>
+  <ul class="locations">
+  </ul>
   `
   return locationIndexHTML
+}
+
+Location.prototype.formatLocationIndex = function() {
+  let locationHTML = `
+  <li data-id="${this.id}">
+    <strong>${this.name}</strong><br>
+    ${this.city}, ${this.state}<br>
+    <button class="btn btn-xs btn-default">Edit</button>
+  </li><br>
+  `
+  return locationHTML
 }
