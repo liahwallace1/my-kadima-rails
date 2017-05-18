@@ -6,7 +6,7 @@ const bindClickHandlers = () => {
   $(".home").on("click", (e) => {
     e.preventDefault();
     let userId = $(".profile").data("userid");
-    history.pushState(null, null, ``);
+    history.pushState(null, null, `/`);
     clearContent();
     getHome();
   });
@@ -37,6 +37,12 @@ const bindClickHandlers = () => {
     history.pushState(null, null, `/users/${userId}/games/new`);
     clearContent();
     getNewGame(userId);
+  });
+  $(".see-locations").on("click", (e) => {
+    e.preventDefault();
+    history.pushState(null, null, `/locations`);
+    clearContent();
+    getLocations();
   });
 }
 
@@ -87,13 +93,19 @@ const getProfile = (userId) => {
     method: 'get',
     url: `/users/${userId}.json`,
     success: function(user) {
+      let newUser = new User(user)
+      let profileHTML = newUser.formatProfile()
+      $('.main-content').append(profileHTML)
       displayProfile(user)
     }
   });
 }
 
-const displayProfile = (user) => {
-  $('.main-content').html("<h1>Profile</h1>")
+User.prototype.formatProfile = function() {
+  let profileHTML = `
+  <h1>${this.username}'s Profile</h1>
+  `
+  return profileHTML
 }
 
 
