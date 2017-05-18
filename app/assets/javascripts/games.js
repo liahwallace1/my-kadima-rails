@@ -38,12 +38,12 @@ const bindClickHandlers = () => {
     clearContent();
     getNewGame(userId);
   });
-  $(".see-locations").on("click", (e) => {
-    e.preventDefault();
-    history.pushState(null, null, `/locations`);
-    clearContent();
-    getLocations();
-  });
+  // $(".see-locations").on("click", (e) => {
+  //   e.preventDefault();
+  //   history.pushState(null, null, `/locations`);
+  //   clearContent();
+  //   getLocations();
+  // });
 }
 
 const clearContent = () => {
