@@ -13,10 +13,16 @@ const bindClickHandlers = () => {
   $(document).on("click", ".clickable-row", function(e)  {
     e.preventDefault();
     let url = $(this).data("href");
-    debugger
     history.pushState(null, null, `${url}`);
     $('.main-content').html("");
     showGame(url);
+  })
+  $(".add-game").on("click", (e) => {
+    e.preventDefault();
+    let userId = $(".add-game").data("userid");
+    $('.main-content').html("");
+    // history.pushState(null, null, `/users/${userId}/games/new`);
+    getNewGame(userId);
   })
 }
 
@@ -32,7 +38,7 @@ function Game(game) {
   this.played_with = game.played_with
 }
 
-/////// INDEX FUNCTIONS /////////
+/////// USER GAMES INDEX FUNCTIONS /////////
 
 Game.prototype.formatIndex = function() {
   let gameHTML = `
@@ -101,7 +107,7 @@ const getGames = (userId) => {
     }
   });
 }
-/////////SHOW FUNCTIONS//////////
+///////// GAME SHOW FUNCTIONS//////////
 
 const showGame = (url) => {
   $.ajax({
@@ -120,4 +126,25 @@ Game.prototype.formatShow = function() {
   <h3>Game Data</h3>
   `
   return showHTML
+}
+
+///////// NEW GAME FUNCTIONS//////////
+
+const getNewGame = (userId) => {
+  $.ajax({
+    method: 'get',
+    url: `/users/${userId}/games/new.json`,
+    success: function(data) {
+      console.log(data)
+      let newGameForm = newGameFormat()
+      $('.main-content').append(newGameForm);
+    }
+  })
+}
+
+const newGameFormat = () => {
+  let newGameForm = `
+    <h1>New Game Form</h1>
+  `
+  return newGameForm
 }

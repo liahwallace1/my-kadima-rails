@@ -22,6 +22,10 @@ class GamesController < ApplicationController
   end
 
   def new
+    respond_to do |f|
+      f.html
+      f.json {render json: Game.new}
+    end
   end
 
   def create
