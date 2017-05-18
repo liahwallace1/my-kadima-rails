@@ -14,7 +14,7 @@
     <!-- LEFT LINKS -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-          <li class="active"> <%= link_to "Home", root_path %> </li>
+          <li class="home"> <%= link_to "Home", root_path %> </li>
 
           <% if logged_in? %>
             <li><%= link_to "#{current_user.username}'s Profile", user_path(current_user), :data => {:userid => current_user.id}, :class => "profile"  %></li>

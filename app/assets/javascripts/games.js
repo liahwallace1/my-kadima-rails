@@ -3,46 +3,81 @@ $(() => {
 })
 
 const bindClickHandlers = () => {
+  $(".home").on("click", (e) => {
+    e.preventDefault();
+    let userId = $(".profile").data("userid");
+    history.pushState(null, null, ``);
+    clearContent();
+    getHome();
+  });
   $(".profile").on("click", (e) => {
     e.preventDefault();
     let userId = $(".profile").data("userid");
-    $('.main-content').html("");
     history.pushState(null, null, `/users/${userId}`);
+    clearContent();
     getProfile(userId);
   });
   $(".see-games").on("click", (e) => {
     e.preventDefault();
     let userId = $(".see-games").data("userid");
-    $('.main-content').html("");
     history.pushState(null, null, `/users/${userId}/games`);
+    clearContent();
     getGames(userId);
   });
   $(document).on("click", ".clickable-row", function(e)  {
     e.preventDefault();
     let url = $(this).data("href");
     history.pushState(null, null, `${url}`);
-    $('.main-content').html("");
+    clearContent();
     showGame(url);
   });
   $(".add-game").on("click", (e) => {
     e.preventDefault();
     let userId = $(".add-game").data("userid");
-    $('.main-content').html("");
-    // history.pushState(null, null, `/users/${userId}/games/new`);
+    history.pushState(null, null, `/users/${userId}/games/new`);
+    clearContent();
     getNewGame(userId);
   });
 }
 
+const clearContent = () => {
+  $('.main-content').html("")
+}
+
+//////// HOME PAGE //////////
+
+const getHome = () => {
+  $.ajax({
+    method: 'get',
+    url: ``,
+    success: function() {
+      let homeHTML = homeFormat()
+      $('.main-content').append(homeHTML);
+    }
+  });
+}
+
+const homeFormat = () => {
+  let homeHTML =
+  `
+  <div>
+    <h3 class="text-center">Welcome to My Kadima - your Kadima game tracker!</h3>
+  </div>
+  <div>
+    <img src='/assets/mykadima-logo.png' class="home-img center-block" title="my-kadima-logo">
+  </div>
+  `
+  return homeHTML
+}
+
+
 //////// USER OBJECT //////////
 
-function User(game) {
-  this.id = game.id
-  this.date_played = game.date_played
-  this.distance = game.distance
-  this.game_type = game.game_type
-  this.volley_total = game.volley_total
-  this.location = game.location
-  this.played_with = game.played_with
+function User(user) {
+  this.id = user.id
+  this.username = user.username
+  this.games = user.games
+  this.locations = user.locations
 }
 
 //////// USER SHOW FUNCTIONS //////////
