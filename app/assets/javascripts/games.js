@@ -44,6 +44,14 @@ const bindClickHandlers = () => {
     clearContent();
     getLocations();
   });
+  $(document).on("click", "li a", function(e)  {
+    e.preventDefault();
+    let url = $(this).attr("href");
+    history.pushState(null, null, `${url}`);
+    clearContent();
+    showLocation(url);
+  });
+
 }
 
 const clearContent = () => {
@@ -197,17 +205,17 @@ const showGame = (url) => {
     url: `${url}.json`,
     success: function(game) {
     let newGame = new Game(game);
-    let gameShowHTML = newGame.formatShow();
+    let gameShowHTML = newGame.formatGameShow();
     $('.main-content').append(gameShowHTML);
     }
   })
 }
 
-Game.prototype.formatShow = function() {
-  let showHTML = `
+Game.prototype.formatGameShow = function() {
+  let gameShowHTML = `
   <h3>Game Data</h3>
   `
-  return showHTML
+  return gameShowHTML
 }
 
 ///////// NEW GAME FUNCTIONS//////////
@@ -278,10 +286,35 @@ const locationIndexStatic = () => {
 Location.prototype.formatLocationIndex = function() {
   let locationHTML = `
   <li data-id="${this.id}">
-    <strong>${this.name}</strong><br>
+    <a href="/locations/${this.id}"><strong>${this.name}</strong></a><br>
     ${this.city}, ${this.state}<br>
     <button class="btn btn-xs btn-default">Edit</button>
   </li><br>
   `
   return locationHTML
+}
+
+///////// LOCATION SHOW FUNCTIONS//////////
+
+const showLocation = (url) => {
+  $.ajax({
+    method: 'get',
+    url: `${url}.json`,
+    success: function(location) {
+    let newLocation = new Location(location);
+    let locationShowHTML = newLocation.formatLocationShow();
+    $('.main-content').append(locationShowHTML);
+    }
+  })
+}
+
+Location.prototype.formatLocationShow = function() {
+  let locationShowHTML = `
+  <h3>${this.name} Information</h3>
+  <h4>${this.city}, ${this.state}</h4>
+  <br>
+  <p>Turf: ${this.turf}<p>
+  <p>Lighting: ${this.lighting}</p>
+  `
+  return locationShowHTML
 }
