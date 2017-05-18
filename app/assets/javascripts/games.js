@@ -12,10 +12,11 @@ const bindClickHandlers = () => {
   })
   $(document).on("click", ".clickable-row", function(e)  {
     e.preventDefault();
-    let id = $(this).data("id");
-    // history.pushState(null, null, `games/${id}`);
+    let url = $(this).data("href");
+    debugger
+    history.pushState(null, null, `${url}`);
     $('.main-content').html("");
-    showGame(id);
+    showGame(url);
   })
 }
 
@@ -35,7 +36,7 @@ function Game(game) {
 
 Game.prototype.formatIndex = function() {
   let gameHTML = `
-    <tr class="clickable-row" data-id="${this.id}">
+    <tr class="clickable-row" data-href="/games/${this.id}">
       <td>${this.date_played}</td>
       <td>${this.location.name}</td>
       <td>${this.game_type}</td>
@@ -102,14 +103,15 @@ const getGames = (userId) => {
 }
 /////////SHOW FUNCTIONS//////////
 
-const showGame = (id) => {
-
-  fetch(`/games/${id}.json`)
-  .then((res) => res.json())
-  .then(game => {
-    let newGame = new Game(game)
-    let showHTML = newGame.formatShow()
-    $('.main-content').append(showHTML)
+const showGame = (url) => {
+  $.ajax({
+    method: 'get',
+    url: `${url}.json`,
+    success: function(game) {
+    let newGame = new Game(game);
+    let showHTML = newGame.formatShow();
+    $('.main-content').append(showHTML);
+    }
   })
 }
 
