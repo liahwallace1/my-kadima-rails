@@ -22,7 +22,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Games<span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><%= link_to "See My Games", user_games_path(current_user), :data => {:userid => current_user.id}, :class => "see-games" %></li>
-                <li><%= link_to "Add a New Game", new_user_game_path(current_user), :class => "add-game" %></li>
+                <li><%= link_to "Add a New Game", new_user_game_path(current_user), :data => {:userid => current_user.id}, :class => "add-game" %></li>
               </ul>
             </li>
             <li class="dropdown">

@@ -5,14 +5,16 @@ $(() => {
 const bindClickHandlers = () => {
   $(".see-games").on("click", (e) => {
     e.preventDefault();
-    $('#main-content').html("")
-    getGames();
+    let userId = $(".see-games").data("userid");
+    $('#main-content').html("");
+    // history.pushState(null, null, `/users/${userId}/games`);
+    getGames(userId);
   })
   $(document).on("click", ".clickable-row", function(e)  {
     e.preventDefault();
-    let id = $(this).attr("data-id")
-    history.pushState(null, null, `games/${id}`);
-    $('#main-content').html("")
+    let id = $(this).data("id");
+    // history.pushState(null, null, `games/${id}`);
+    $('#main-content').html("");
     showGame(id);
   })
 }
@@ -30,28 +32,6 @@ function Game(game) {
 }
 
 /////// INDEX FUNCTIONS /////////
-const getGames = () => {
-  fetch(`/users/***id***/games.json`)
-  .then((res) => res.json())
-  .then((games) => {
-    if objIsEmpty(games) {
-      noGameIndex()
-    } else {
-      displayGames(games)
-    }
-  })
-}
-
-const displayGames = (games) => {
-  history.pushState(null, null, `${games[0].links.user_games_url}`);
-  let indexStatic = indexStatic()
-  $('#main-content').html(indexStatic)
-  games.forEach((game) => {
-    let newGame = new Game(game)
-    let gameHTML = newGame.formatIndex()
-    $('.game-rows').append(gameHTML)
-  })
-}
 
 Game.prototype.formatIndex = function() {
   let gameHTML = `
@@ -67,7 +47,7 @@ Game.prototype.formatIndex = function() {
   return gameHTML
 }
 
-const indexStatic = function() {
+const indexStatic = () => {
   let indexStatic = `
   <h3>Your Games</h3>
     <div class="table-responsive">
@@ -89,7 +69,7 @@ const indexStatic = function() {
   return indexStatic
 }
 
-const objIsEmpty(obj) {
+const objIsEmpty = (obj) => {
   for (var key in obj) {
     if (obj.hasOwnProperty(key))
       return false;
@@ -105,7 +85,30 @@ const noGameIndex = () => {
   return indexStatic
 }
 
+const displayGames = (games) => {
+  let emptyTable = indexStatic();
+  $('#main-content').html(emptyTable);
+  games.forEach((game) => {
+    let newGame = new Game(game)
+    let gameHTML = newGame.formatIndex()
+    $('.game-rows').append(gameHTML)
+  })
+}
 
+const getGames = (userId) => {
+  $.ajax({
+    method: 'get',
+    url: `/users/${userId}/games.json`,
+    success: function(games) {
+      $("#main-content").html(games)
+      // if (objIsEmpty(games)) {
+      //   noGameIndex()
+      // } else {
+      //   displayGames(games)
+      // }
+    }
+  });
+}
 /////////SHOW FUNCTIONS//////////
 
 const showGame = (id) => {
