@@ -6,15 +6,15 @@ const bindClickHandlers = () => {
   $(".see-games").on("click", (e) => {
     e.preventDefault();
     let userId = $(".see-games").data("userid");
-    $('#main-content').html("");
-    // history.pushState(null, null, `/users/${userId}/games`);
+    $('.main-content').html("");
+    history.pushState(null, null, `/users/${userId}/games`);
     getGames(userId);
   })
   $(document).on("click", ".clickable-row", function(e)  {
     e.preventDefault();
     let id = $(this).data("id");
     // history.pushState(null, null, `games/${id}`);
-    $('#main-content').html("");
+    $('.main-content').html("");
     showGame(id);
   })
 }
@@ -69,14 +69,6 @@ const indexStatic = () => {
   return indexStatic
 }
 
-const objIsEmpty = (obj) => {
-  for (var key in obj) {
-    if (obj.hasOwnProperty(key))
-      return false;
-  }
-  return true;
-}
-
 const noGameIndex = () => {
   let indexStatic = `
   <h3>Your Games</h3>
@@ -87,7 +79,7 @@ const noGameIndex = () => {
 
 const displayGames = (games) => {
   let emptyTable = indexStatic();
-  $('#main-content').html(emptyTable);
+  $('.main-content').html(emptyTable);
   games.forEach((game) => {
     let newGame = new Game(game)
     let gameHTML = newGame.formatIndex()
@@ -100,12 +92,11 @@ const getGames = (userId) => {
     method: 'get',
     url: `/users/${userId}/games.json`,
     success: function(games) {
-      $("#main-content").html(games)
-      // if (objIsEmpty(games)) {
-      //   noGameIndex()
-      // } else {
-      //   displayGames(games)
-      // }
+      if (games.length === 0) {
+        noGameIndex()
+      } else {
+        displayGames(games)
+      }
     }
   });
 }
@@ -118,7 +109,7 @@ const showGame = (id) => {
   .then(game => {
     let newGame = new Game(game)
     let showHTML = newGame.formatShow()
-    $('#main-content').append(showHTML)
+    $('.main-content').append(showHTML)
   })
 }
 
