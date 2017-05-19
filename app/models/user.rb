@@ -24,8 +24,17 @@ class User < ApplicationRecord
 
   ## METHODS FOR GAME STATS
 
+  def single_game_exist?
+    !self.games.where("game_type=?", "one-on-one").empty?
+  end
+
+  def multi_game_exist?
+    !self.games.where("game_type=?", "multi-player").empty?
+  end
+
   def high_score_single_game
-    self.games.where("game_type=?", "one-on-one").order("volley_total desc").limit(1)
+    best_game_score = self.games.where("game_type=?", "one-on-one").order("volley_total desc").limit(1)
+    "No one-on-one games yet!" unless best_game_score
   end
 
   def high_score_single_score
@@ -51,15 +60,23 @@ class User < ApplicationRecord
   def frequent_partner_name
     player_array = self.games.map { |game| game.players.where.not(id: self.id).pluck(:username)}
     player_array.flatten!
-    freq = player_array.inject(Hash.new(0)) {|k, v| k[v] += 1; k }
-    player_array.max_by { |v| freq[v]}
+    if player_array.length > 0
+      freq = player_array.inject(Hash.new(0)) {|k, v| k[v] += 1; k }
+      player_array.max_by { |v| freq[v]}
+    else
+      "None"
+    end
   end
 
 
   def frequent_location_name
     location_array = self.games.map { |game| game.location.name }
-    freq = location_array.inject(Hash.new(0)) {|k, v| k[v] += 1; k }
-    location_array.max_by { |v| freq[v]}
+    if location_array.length > 0
+      freq = location_array.inject(Hash.new(0)) {|k, v| k[v] += 1; k }
+      location_array.max_by { |v| freq[v]}
+    else
+      "None"
+    end
   end
 
   def game_number(game)

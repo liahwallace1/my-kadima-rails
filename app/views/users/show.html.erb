@@ -7,14 +7,14 @@
 <h3>Your Stats:</h3>
 
 <p><strong>High Score for One-on-One Game: </strong>
-  <% if single_game_exist? %>
+  <% if @user.single_game_exist? %>
     <%= @user.high_score_single_score %> volleys with Player <%= @user.high_score_single_partner %></p><br>
   <% else %>
     <%= "No one-on-one games yet!" %></p><br>
   <% end %>
 
 <p><strong>High Score for Group Game: </strong>
-  <% if multi_game_exist? %>
+  <% if @user.multi_game_exist? %>
     <%= @user.high_score_group_score %> volleys with Players <%= @user.high_score_group_partners %></p><br>
   <% else %>
     <%= "No multi-player games yet!" %></p><br>

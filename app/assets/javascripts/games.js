@@ -110,6 +110,13 @@ function User(user) {
   this.username = user.username
   this.games = user.games
   this.locations = user.locations
+  this.high_score_single_score = user.high_score_single_score
+  this.high_score_single_partner = user.high_score_single_partner
+  this.high_score_group_score = user.high_score_group_score
+  this.high_score_group_partners = user.high_score_group_partners
+  this.frequent_partner_name = user.frequent_partner_name
+  this.frequent_location_name = user.frequent_location_name
+  this.number_of_games = user.number_of_games
 }
 
 //////// USER SHOW FUNCTIONS //////////
@@ -128,7 +135,23 @@ const getProfile = (userId) => {
 
 User.prototype.formatProfile = function() {
   let profileHTML = `
-  <h1>${this.username}'s Profile</h1>
+  <h3>${this.username}'s Player Profile</h3><br>
+  <button class="btn btn-primary">Add a New Game</button>
+  <h3>Your Stats:</h3><br>
+
+  <p><strong>High Score for One-on-One Game: </strong>${this.high_score_single_score} volleys with Player ${this.high_score_single_partner}</p><br>
+
+  <p><strong>High Score for Group Game: </strong>${this.high_score_group_score} volleys with Players ${this.high_score_group_partners}</p><br>
+
+  <p><strong>Number of Games: </strong>${this.number_of_games}</p><br>
+
+  <p><strong>Favorite Partner: </strong>${this.frequent_partner_name}</p><br>
+
+  <p><strong>Favorite Location: </strong>${this.frequent_location_name}</p><br>
+  <br>
+  <br>
+  <br>
+  <button class="btn btn-warning">Edit User Profile</button>
   `
   return profileHTML
 }
@@ -203,6 +226,8 @@ const displayGames = (games) => {
 }
 
 const getGames = (userId) => {
+  // fetch(`/users/${userId}/games.json`)
+  //   .then(res => console.log(res))
   $.ajax({
     method: 'get',
     url: `/users/${userId}/games.json`,
