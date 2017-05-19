@@ -1,8 +1,8 @@
 $(() => {
-  bindClickHandlers()
+  bindStaticClickHandlers()
 })
 
-const bindClickHandlers = () => {
+const bindStaticClickHandlers = () => {
   //home page
   $(".home").on("click", (e) => {
     e.preventDefault();

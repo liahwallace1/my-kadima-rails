@@ -1,8 +1,8 @@
 $(() => {
-  bindClickHandlers()
+  bindLocationClickHandlers()
 })
 
-const bindClickHandlers = () => {
+const bindLocationClickHandlers = () => {
   // Locations index
   $(".see-locations").on("click", (e) => {
     e.preventDefault();
@@ -27,9 +27,6 @@ const bindClickHandlers = () => {
   });
 }
 
-const clearContent = () => {
-  $('.main-content').html("")
-}
 
 //////// LOCATION OBJECT //////////
 

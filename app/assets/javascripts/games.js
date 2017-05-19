@@ -1,8 +1,8 @@
 $(() => {
-  bindClickHandlers()
+  bindGameClickHandlers()
 })
 
-const bindClickHandlers = () => {
+const bindGameClickHandlers = () => {
   //User games index
   $(".see-games").on("click", (e) => {
     e.preventDefault();
@@ -29,9 +29,6 @@ const bindClickHandlers = () => {
   });
 }
 
-const clearContent = () => {
-  $('.main-content').html("")
-}
 
 
 //////// GAME OBJECT //////////

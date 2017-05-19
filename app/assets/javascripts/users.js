@@ -1,8 +1,8 @@
 $(() => {
-  bindClickHandlers()
+  bindUserClickHandlers()
 })
 
-const bindClickHandlers = () => {
+const bindUserClickHandlers = () => {
   // profile page
   $(".profile").on("click", (e) => {
     e.preventDefault();
@@ -13,9 +13,6 @@ const bindClickHandlers = () => {
   });
 }
 
-const clearContent = () => {
-  $('.main-content').html("")
-}
 
 //////// USER OBJECT //////////
 
