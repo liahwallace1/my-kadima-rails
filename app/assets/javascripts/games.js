@@ -9,6 +9,7 @@ const bindGameClickHandlers = () => {
     let userId = $(".see-games").data("userid");
     history.pushState(null, null, `/users/${userId}/games`);
     clearContent();
+    gameIndexStatic();
     getGames(userId);
   });
   // Game show
@@ -41,6 +42,7 @@ function Game(game) {
   this.volley_total = game.volley_total
   this.location = game.location
   this.played_with = game.played_with
+  this.current_user_name = game.current_user_name
 }
 
 /////// USER GAMES INDEX FUNCTIONS /////////
@@ -61,7 +63,7 @@ Game.prototype.formatGameIndex = function() {
 
 const gameIndexStatic = () => {
   let emptyTable = `
-  <h3>Your Games</h3>
+  <h3>${this.current_user_name}'s Games</h3>
     <div class="table-responsive">
       <table class="table table-hover">
         <thead>
@@ -78,20 +80,19 @@ const gameIndexStatic = () => {
       </table>
     </div>
   `
-  return emptyTable
+  return $('.main-content').html(emptyTable);
 }
 
 const noGameIndex = () => {
-  let emptyTable = `
-  <h3>Your Games</h3>
+  let noGames = `
   <div><p>No games.</p></div>
   `
-  return emptyTable
+  return $('.main-content').append(noGames)
 }
 
 const displayGames = (games) => {
-  let emptyTable = gameIndexStatic();
-  $('.main-content').html(emptyTable);
+
+
   games.forEach((game) => {
     let newGame = new Game(game)
     let gameHTML = newGame.formatGameIndex()

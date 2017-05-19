@@ -19,7 +19,7 @@ class LocationsController < ApplicationController
     @location = Location.new
     respond_to do |f|
       f.html
-      f.json {render json: @location}
+      f.json {render json: Location.new}
     end
   end
 

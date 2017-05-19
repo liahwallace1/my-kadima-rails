@@ -64,6 +64,10 @@ class GamesController < ApplicationController
     redirect_to user_games_path(current_user)
   end
 
+  def current_user_name
+    current_user.username
+  end
+
   private
 
   def require_login
