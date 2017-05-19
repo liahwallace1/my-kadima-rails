@@ -4,9 +4,10 @@ class GamesController < ApplicationController
   def index
     if params[:user_id]
       @games = User.find(params[:user_id]).games
+      @username = User.find(params[:user_id]).username
       respond_to do |f|
         f.html
-        f.json {render json: @games}
+        f.json {render json: {games: @games, username: @username}}
       end
     else
       @games = Game.all
@@ -62,10 +63,6 @@ class GamesController < ApplicationController
     set_game
     @game.destroy
     redirect_to user_games_path(current_user)
-  end
-
-  def current_user_name
-    current_user.username
   end
 
   private
