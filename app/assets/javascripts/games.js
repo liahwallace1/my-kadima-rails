@@ -84,6 +84,11 @@ const getHome = () => {
   });
 }
 
+// $.getJSON('', function() {
+// let homeHTML = homeFormat()
+// $('.main-content').append(homeHTML);
+// })
+
 const homeFormat = () => {
   let homeHTML =
   `
@@ -247,7 +252,7 @@ const getNewGame = (userId) => {
 
 const newGameFormat = () => {
   let newGameForm = `
-    <h1>New Game Form</h1>
+    <h3>New Game Form</h3>
   `
   return newGameForm
 }
@@ -264,6 +269,8 @@ function Location(location) {
   this.games = location.games
 }
 
+var total_num_locations = 0 //for Location show page
+
 //////// LOCATION INDEX FUNCTIONS //////////
 
 const getLocations = () => {
@@ -279,6 +286,7 @@ const getLocations = () => {
 const displayLocations = (locations) => {
   let locationIndexHTML = locationIndexStatic();
   $('.main-content').html(locationIndexHTML);
+  total_num_locations = locations.length // for Location show page
   locations.forEach((location) => {
     let newLocation = new Location(location)
     let locationHTML = newLocation.formatLocationIndex()
@@ -288,7 +296,7 @@ const displayLocations = (locations) => {
 
 const locationIndexStatic = () => {
   let locationIndexHTML = `
-  <h1>Locations</h1><br>
+  <h3>Locations</h3><br>
   <button class="btn btn-primary add-location">Add a Location</button><br><br>
   <ul class="locations">
   </ul>
@@ -326,8 +334,31 @@ Location.prototype.formatLocationShow = function() {
   <h3>${this.name} Information</h3>
   <h4>${this.city}, ${this.state}</h4>
   <br>
+  <p>Ranked #${this.rank} of ${total_num_locations} locations, based on number of games played there.</p>
   <p>Turf: ${this.turf}<p>
   <p>Lighting: ${this.lighting}</p>
   `
+  debugger
   return locationShowHTML
+}
+
+///////// NEW LOCATION FUNCTIONS//////////
+
+const getNewLocation = () => {
+  $.ajax({
+    method: 'get',
+    url: `/locations/new.json`,
+    success: function(data) {
+      console.log(data)
+      let newLocationForm = newLocationFormat()
+      $('.main-content').append(newLocationForm);
+    }
+  })
+}
+
+const newLocationFormat = () => {
+  let newLocationForm = `
+    <h3>New Location Form</h3>
+  `
+  return newLocationForm
 }
