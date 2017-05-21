@@ -34,7 +34,6 @@ class User < ApplicationRecord
 
   def high_score_single_game
     best_game_score = self.games.where("game_type=?", "one-on-one").order("volley_total desc").limit(1)
-    "No one-on-one games yet!" unless best_game_score
   end
 
   def high_score_single_score
