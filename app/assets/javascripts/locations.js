@@ -10,7 +10,7 @@ const bindLocationClickHandlers = () => {
     clearContent();
     getLocations();
   });
-  // Location show
+  // Show Location
   $(document).on("click", ".location-click", function(e)  {
     e.preventDefault();
     let url = $(this).attr("href");
@@ -18,7 +18,7 @@ const bindLocationClickHandlers = () => {
     clearContent();
     showLocation(url);
   });
-  // Add location
+  // New location
   $(document).on("click", ".add-location", (e) => {
     e.preventDefault();
     history.pushState(null, null, `/locations/new`);
@@ -136,7 +136,21 @@ const getNewLocation = () => {
 
 const newLocationFormat = () => {
   let newLocationForm = `
-    <h3>New Location Form</h3>
+    <h3>Add a New Location</h3><br>
+    <label>Name </label> <input type="text" name="${this.name}" id="location_name"><br>
+    <label>City </label> <input type="text" name="${this.city}" id="location_city"><br>
+    <label>State </label> <select name="${this.state}" id="location_state"></select><br>
+    <label>Check if this location has lighting at night: </label>  <input type="checkbox" value="1" name="${this.lighting}" id="location_lighting"><br>
+    <label>Turf </label>
+    <select name="${this.turf}" id="location_turf"><option value=""></option>
+      <option value="clay">clay</option>
+      <option value="concrete">concrete</option>
+      <option value="grass">grass</option>
+      <option value="sand">sand</option>
+      <option value="other">other</option>
+    </select><br><br>
+    <input type="submit" name="commit" value="Create Location" class="btn btn-primary" data-disable-with="Create Location">
+    <a class="btn btn-primary" href="/locations">Back to Locations</a>
   `
   return newLocationForm
 }
