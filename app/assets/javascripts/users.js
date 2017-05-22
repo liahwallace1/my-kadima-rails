@@ -110,14 +110,14 @@ const getEditUser = (userId) => {
     success: function(user) {
     let newUser = new User(user);
     let editHTML = newUser.formatEditPage();
-    $('.main-content').append(profileHTML);
+    $('.main-content').append(editHTML);
     }
   });
 }
 
 User.prototype.formatEditPage = function() {
   let editHTML = `
-  <h3>Edit ${this.username}'s Account Information</h3><br>
+  <h3>Edit your MyKadima account:</h3><br>
   `
   return editHTML
 }
