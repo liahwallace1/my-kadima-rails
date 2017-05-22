@@ -17,6 +17,12 @@ const bindUserClickHandlers = () => {
     clearContent();
     getNewGame(userId);
   });
+  $(document).on("click", "button.edit-user", () => {
+    let userId = $("button.edit-user").data("userid");
+    history.pushState(null, null, `/users/${userId}/edit`);
+    clearContent();
+    getEditUser(userId);
+  });
 }
 
 
@@ -56,7 +62,7 @@ User.prototype.formatProfile = function() {
   <br>
   <br>
   <br>
-  <button class="btn btn-warning edit-user">Edit User Profile</button>
+  <button class="btn btn-warning edit-user" data-userid="${this.id}">Edit User Profile</button>
   `
   return profileHTML
 }
@@ -93,4 +99,25 @@ const getProfile = (userId) => {
       newUser.formatHighGameMulti();
     }
   });
+}
+
+//////// USER EDIT FUNCTIONS //////////
+
+const getEditUser = (userId) => {
+  $.ajax({
+    method: 'get',
+    url: `/users/${userId}/edit.json`,
+    success: function(user) {
+    let newUser = new User(user);
+    let editHTML = newUser.formatEditPage();
+    $('.main-content').append(profileHTML);
+    }
+  });
+}
+
+User.prototype.formatEditPage = function() {
+  let editHTML = `
+  <h3>Edit ${this.username}'s Account Information</h3><br>
+  `
+  return editHTML
 }
