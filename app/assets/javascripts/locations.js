@@ -21,14 +21,22 @@ const bindLocationClickHandlers = () => {
   // New location form
   $(document).on("click", ".add-location", (e) => {
     e.preventDefault();
+    var authToken = $('meta[name=csrf-token]').attr('content');
     history.pushState(null, null, `/locations/new`);
     clearContent();
-    getNewLocation();
+    getNewLocation(authToken);
   });
   // New Location submit
-  $(document).on("submit", "form.new_location", (e) => {
+  $(document).on('submit', '.new_location', (e) => {
     e.preventDefault();
-    console.log(this)
+    $.ajax({
+      type: this.method,
+      url: this.action,
+      data: $(this).serialize(),
+      success: function(location) {
+        console.log(location)
+      }
+    })
   })
   // Edit location
   $(document).on("click", "button.edit-location", (e) => {
@@ -249,50 +257,52 @@ const listTurfs = () => {
 
 ///////// NEW LOCATION FUNCTIONS//////////
 
-Location.prototype.formatNewLocation = function() {
+Location.prototype.formatNewLocation = function(authToken) {
   let newLocationHTML = `
-    <h3>Add a New Location</h3><br>
-    <form class="new_location" id="new_location" action="/locations" method="post">
+    <h3>Add a New Location (j)</h3><br>
+    <form class="new_location" id="new_location" action="/locations" method="post" accept-charset="UTF-8">
+      <input name="utf8" type="hidden" value="✓">
+      <input type="hidden" name="authenticity_token" value="${authToken}">
       <label>Name </label> <input type="text" id="location_name"><br>
       <label>City </label> <input type="text" id="location_city"><br>
       <label>State </label> <select id="location_state"></select><br>
       <label>Check if this location has lighting at night: </label>  <input type="checkbox" value="1"  id="location_lighting"><br>
       <label>Turf </label><select  id="location_turf"></select><br><br>
       <input type="submit" name="commit" value="Create Location" class="btn btn-primary">
+      <a class="btn btn-primary see-locations" href="/locations">Back to Locations</a>
     </form>
-    <a class="btn btn-primary see-locations" href="/locations">Back to Locations</a>
   `
   return newLocationHTML
 }
 
-const getNewLocation = () => {
+const getNewLocation = (authToken) => {
   $.ajax({
     method: 'get',
     url: `/locations/new.json`,
     success: function(data) {
-      displayNewLocationForm();
+      displayNewLocationForm(authToken);
     }
   })
 }
 
-const displayNewLocationForm = () => {
+const displayNewLocationForm = (authToken) => {
   let newLocation = new Location(location);
-  let newLocationHTML = newLocation.formatNewLocation();
+  let newLocationHTML = newLocation.formatNewLocation(authToken);
   $('.main-content').append(newLocationHTML);
   listStates();
   listTurfs();
 }
 
-const postNewLocation = () => {
-  $.ajax({
-    type: "POST",
-    url: "/locations",
-    data: $("form.new_location").serialize(),
-    success: function(response) {
-      console.log(response)
-    }
-  })
-}
+// const postNewLocation = () => {
+//   $.ajax({
+//     type: "POST",
+//     url: "/locations",
+//     data: $("form.new_location").serialize(),
+//     success: function(response) {
+//       console.log(response)
+//     }
+//   })
+// }
 
 ///////// EDIT LOCATION FUNCTIONS//////////
 
@@ -307,8 +317,8 @@ Location.prototype.formatEditLocation = function() {
       <label>Turf </label>
       <select value="${this.turf}" id="location_turf"></select><br><br>
       <input type="submit" name="commit" value="Edit Location" class="btn btn-primary">
+      <a class="btn btn-primary see-locations" href="/locations">Back to Locations</a>
     </form>
-    <a class="btn btn-primary see-locations" href="/locations">Back to Locations</a>
   `
   return editLocationHTML
 }
