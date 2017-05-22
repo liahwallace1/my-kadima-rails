@@ -11,6 +11,12 @@ const bindUserClickHandlers = () => {
     clearContent();
     getProfile(userId);
   });
+  $(document).on("click", "button.add-game", () => {
+    let userId = $("button.add-game").data("userid");
+    history.pushState(null, null, `/users/${userId}/games/new`);
+    clearContent();
+    getNewGame(userId);
+  });
 }
 
 
@@ -35,7 +41,7 @@ function User(user) {
 User.prototype.formatProfile = function() {
   let profileHTML = `
   <h3>${this.username}'s Player Profile</h3><br>
-  <button class="btn btn-primary">Add a New Game</button>
+  <button class="btn btn-primary add-game" data-userid="${this.id}">Add a New Game</button>
   <h3>Your Stats:</h3>
 
   <p id="high-score-single"></p><br>
@@ -50,7 +56,7 @@ User.prototype.formatProfile = function() {
   <br>
   <br>
   <br>
-  <button class="btn btn-warning">Edit User Profile</button>
+  <button class="btn btn-warning edit-user">Edit User Profile</button>
   `
   return profileHTML
 }

@@ -38,6 +38,7 @@ function Location(location) {
   this.lighting = location.lighting
   this.turf = location.turf
   this.games = location.games
+  this.rank = location.rank
 }
 
 var total_num_locations = 0 //for Location show page
@@ -109,7 +110,6 @@ Location.prototype.formatLocationShow = function() {
   <p>Turf: ${this.turf}<p>
   <p>Lighting: ${this.lighting}</p>
   `
-  debugger
   return locationShowHTML
 }
 
