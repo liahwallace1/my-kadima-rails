@@ -25,6 +25,14 @@ const bindLocationClickHandlers = () => {
     clearContent();
     getNewLocation();
   });
+  // Edit location
+  $(document).on("click", "button.edit-location", (e) => {
+    debugger
+    let locationId = $(this).data("id");
+    history.pushState(null, null, `/locations/${locationId}/edit`);
+    clearContent();
+    getEditLocation(locationId);
+  });
 }
 
 
@@ -81,7 +89,7 @@ Location.prototype.formatLocationIndex = function() {
   <li data-id="${this.id}">
     <a href="/locations/${this.id}" class="location-click"><strong>${this.name}</strong></a><br>
     ${this.city}, ${this.state}<br>
-    <button class="btn btn-xs btn-default">Edit</button>
+    <button class="btn btn-xs btn-default edit-location" data-id="${this.id}">Edit</button>
   </li><br>
   `
   return locationHTML
@@ -132,4 +140,25 @@ const newLocationFormat = () => {
     <h3>New Location Form</h3>
   `
   return newLocationForm
+}
+
+///////// NEW LOCATION FUNCTIONS//////////
+
+const getEditLocation = (locationId) => {
+  $.ajax({
+    method: 'get',
+    url: `/locations/${locationId}/edit.json`,
+    success: function(data) {
+      console.log(data)
+      let editLocationForm = editLocationFormat()
+      $('.main-content').append(editLocationForm);
+    }
+  })
+}
+
+const editLocationFormat = () => {
+  let editLocationForm = `
+    <h3>Edit Location Form</h3>
+  `
+  return editLocationForm
 }
