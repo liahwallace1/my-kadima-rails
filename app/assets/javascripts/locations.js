@@ -268,8 +268,13 @@ const displayEditLocationForm = (location) => {
   let newLocation = new Location(location);
   let editLocationHTML = newLocation.formatEditLocation();
   $('.main-content').append(editLocationHTML);
-  autoSelectState(location.state);
-  autoSelectTurf(location.turf);
+  autoLocationEdit(location.state, location.lighting, location.turf);
+}
+
+const autoLocationEdit = (state, lighting, turf) => {
+  autoSelectState(state);
+  autoCheckLighting(lighting);
+  autoSelectTurf(turf);
 }
 
 const autoSelectState = (state) => {
@@ -280,4 +285,10 @@ const autoSelectState = (state) => {
 const autoSelectTurf = (turf) => {
   listTurfs();
   $(`select option[value="${turf}"]`).attr("selected","selected");
+}
+
+const autoCheckLighting = (lighting) => {
+  if (lighting === true) {
+    $(`#location_lighting`).attr("checked", "checked")
+  }
 }
