@@ -4,7 +4,7 @@ $(() => {
 
 const bindLocationClickHandlers = () => {
   // Locations index
-  $(".see-locations").on("click", (e) => {
+  $(document).on("click", ".see-locations", (e) => {
     e.preventDefault();
     history.pushState(null, null, `/locations`);
     clearContent();
@@ -32,10 +32,6 @@ const bindLocationClickHandlers = () => {
     clearContent();
     getEditLocation(locationId);
   });
-  // Back to Locations button
-  $(document).on("click", "button.locations-back", (e) => {
-
-  })
 }
 
 
@@ -208,7 +204,7 @@ Location.prototype.formatNewLocation = function() {
     <label>Check if this location has lighting at night: </label>  <input type="checkbox" value="1"  id="location_lighting"><br>
     <label>Turf </label><select  id="location_turf"></select><br><br>
     <input type="submit" name="commit" value="Create Location" class="btn btn-primary">
-    <a class="btn btn-primary" href="/locations">Back to Locations</a>
+    <a class="btn btn-primary see-locations" href="/locations">Back to Locations</a>
   `
   return newLocationHTML
 }
@@ -247,7 +243,7 @@ Location.prototype.formatEditLocation = function() {
     <label>Turf </label>
     <select value="${this.turf}" id="location_turf"></select><br><br>
     <input type="submit" name="commit" value="Edit Location" class="btn btn-primary">
-    <a class="btn btn-primary" href="/locations">Back to Locations</a>
+    <a class="btn btn-primary see-locations" href="/locations">Back to Locations</a>
   `
   return editLocationHTML
 }
