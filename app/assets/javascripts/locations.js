@@ -32,6 +32,7 @@ const bindLocationClickHandlers = () => {
     clearContent();
     getEditLocation(locationId);
   });
+  // Back to Locations button
 }
 
 
@@ -120,24 +121,11 @@ Location.prototype.formatLocationShow = function() {
   return locationShowHTML
 }
 
-///////// NEW LOCATION FUNCTIONS//////////
+///////// LOCATION FORMS //////////
 
-const getNewLocation = () => {
-  $.ajax({
-    method: 'get',
-    url: `/locations/new.json`,
-    success: function(data) {
-      let newLocation = new Location(location);
-      let newLocationHTML = newLocation.formatNewLocation();
-      $('.main-content').append(newLocationHTML);
-      listStates();
-    }
-  })
-}
-
-Location.prototype.formatNewLocation = function() {
-  let newLocationHTML = `
-    <h3>Add a New Location</h3><br>
+Location.prototype.formatLocationForm = function() {
+  let locationFormHTML = `
+    <h3>Add a New Location (j)</h3><br>
     <label>Name </label> <input type="text" name="${this.name}" id="location_name"><br>
     <label>City </label> <input type="text" name="${this.city}" id="location_city"><br>
     <label>State </label> <select name="${this.state}" id="location_state"></select><br>
@@ -153,7 +141,7 @@ Location.prototype.formatNewLocation = function() {
     <input type="submit" name="commit" value="Create Location" class="btn btn-primary" data-disable-with="Create Location">
     <a class="btn btn-primary" href="/locations">Back to Locations</a>
   `
-  return newLocationHTML
+  return locationFormHTML
 }
 
 const listStates = () => {
@@ -214,16 +202,37 @@ const listStates = () => {
   return $('#location_state').append(stateOptions);
 }
 
+const displayLocationForm = () => {
+  let newLocation = new Location(location);
+  let locationFormHTML = newLocation.formatLocationForm();
+  $('.main-content').append(locationFormHTML);
+  listStates();
+}
+
 ///////// NEW LOCATION FUNCTIONS//////////
+
+const getNewLocation = () => {
+  $.ajax({
+    method: 'get',
+    url: `/locations/new.json`,
+    success: function(data) {
+      displayLocationForm();
+    }
+  })
+}
+
+const postNewLocation = () => {
+
+}
+
+///////// EDIT LOCATION FUNCTIONS//////////
 
 const getEditLocation = (locationId) => {
   $.ajax({
     method: 'get',
     url: `/locations/${locationId}/edit.json`,
     success: function(data) {
-      console.log(data)
-      let editLocationForm = editLocationFormat()
-      $('.main-content').append(editLocationForm);
+      displayLocationForm();
     }
   })
 }
