@@ -26,10 +26,9 @@ const bindLocationClickHandlers = () => {
     getNewLocation();
   });
   // New Location submit
-  $('form').submit((e) => {
+  $(document).on("submit", "form.new_location", (e) => {
     e.preventDefault();
-    var locationId = formLocationId(this);
-    postLocationForm(locationId);
+    console.log(this)
   })
   // Edit location
   $(document).on("click", "button.edit-location", (e) => {
@@ -38,6 +37,11 @@ const bindLocationClickHandlers = () => {
     clearContent();
     getEditLocation(locationId);
   });
+  // Edit Location submit
+  $(document).on("submit", "form.edit_location", (e) => {
+    e.preventDefault();
+    console.log(this)
+  })
 }
 
 
@@ -198,24 +202,24 @@ const listTurfs = () => {
   return $('#location_turf').append(turfOptions);
 }
 
-const formLocationId = (form) => {
-  if (form.hasClass("new_location")) {
-    let var locationId = 0
-  } else {
-    let var locationId = form.data("id")
-  }
-  return locationId
-}
-
-const postLocationForm = (locationId) => {
-  $.ajax({
-      type: (locationId === 0) ? "POST"  : "PATCH",
-      url: (locationId === 0) ? "/locations" : "/locations/" + locationId,
-      data: { game: { state: getBoard() }},
-      success: callback,
-      dataType: "json",
-  })
-}
+// const formLocationId = (form) => {
+//   if (form.hasClass("new_location")) {
+//     let locationId = 0
+//   } else {
+//     let locationId = form.data("id")
+//   }
+//   return locationId
+// }
+//
+// const postLocationForm = (locationId, form) => {
+//   $.ajax({
+//       type: (locationId === 0) ? "POST"  : "PATCH",
+//       url: (locationId === 0) ? "/locations" : "/locations/" + locationId,
+//       data: form.serialize(),
+//       success: function(data) {console.log("great!")},
+//       dataType: "json"
+//   })
+// }
 
 // $(function() {
 //   $('form').submit(function(e) {
@@ -279,7 +283,16 @@ const displayNewLocationForm = () => {
   listTurfs();
 }
 
-
+const postNewLocation = () => {
+  $.ajax({
+    type: "POST",
+    url: "/locations",
+    data: $("form.new_location").serialize(),
+    success: function(response) {
+      console.log(response)
+    }
+  })
+}
 
 ///////// EDIT LOCATION FUNCTIONS//////////
 
