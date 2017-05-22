@@ -33,6 +33,9 @@ const bindLocationClickHandlers = () => {
     getEditLocation(locationId);
   });
   // Back to Locations button
+  $(document).on("click", "button.locations-back", (e) => {
+
+  })
 }
 
 
@@ -123,27 +126,6 @@ Location.prototype.formatLocationShow = function() {
 
 ///////// LOCATION FORMS //////////
 
-Location.prototype.formatLocationForm = function() {
-  let locationFormHTML = `
-    <h3>Add a New Location (j)</h3><br>
-    <label>Name </label> <input type="text" name="${this.name}" id="location_name"><br>
-    <label>City </label> <input type="text" name="${this.city}" id="location_city"><br>
-    <label>State </label> <select name="${this.state}" id="location_state"></select><br>
-    <label>Check if this location has lighting at night: </label>  <input type="checkbox" value="1" name="${this.lighting}" id="location_lighting"><br>
-    <label>Turf </label>
-    <select name="${this.turf}" id="location_turf"><option value=""></option>
-      <option value="clay">clay</option>
-      <option value="concrete">concrete</option>
-      <option value="grass">grass</option>
-      <option value="sand">sand</option>
-      <option value="other">other</option>
-    </select><br><br>
-    <input type="submit" name="commit" value="Create Location" class="btn btn-primary" data-disable-with="Create Location">
-    <a class="btn btn-primary" href="/locations">Back to Locations</a>
-  `
-  return locationFormHTML
-}
-
 const listStates = () => {
   var stateOptions = `
     <option value=""></option>
@@ -202,23 +184,51 @@ const listStates = () => {
   return $('#location_state').append(stateOptions);
 }
 
-const displayLocationForm = () => {
-  let newLocation = new Location(location);
-  let locationFormHTML = newLocation.formatLocationForm();
-  $('.main-content').append(locationFormHTML);
-  listStates();
+const listTurfs = () => {
+  var turfOptions = `
+    <option value=""></option>
+    <option value="clay">clay</option>
+    <option value="concrete">concrete</option>
+    <option value="grass">grass</option>
+    <option value="sand">sand</option>
+    <option value="other">other</option>
+  `
+  return turfOptions
 }
 
+
 ///////// NEW LOCATION FUNCTIONS//////////
+
+Location.prototype.formatNewLocation = function() {
+  let newLocationHTML = `
+    <h3>Add a New Location</h3><br>
+    <label>Name </label> <input type="text" id="location_name"><br>
+    <label>City </label> <input type="text" id="location_city"><br>
+    <label>State </label> <select id="location_state"></select><br>
+    <label>Check if this location has lighting at night: </label>  <input type="checkbox" value="1"  id="location_lighting"><br>
+    <label>Turf </label><select  id="location_turf"></select><br><br>
+    <input type="submit" name="commit" value="Create Location" class="btn btn-primary">
+    <a class="btn btn-primary" href="/locations">Back to Locations</a>
+  `
+  return newLocationHTML
+}
 
 const getNewLocation = () => {
   $.ajax({
     method: 'get',
     url: `/locations/new.json`,
     success: function(data) {
-      displayLocationForm();
+      displayNewLocationForm();
     }
   })
+}
+
+const displayNewLocationForm = () => {
+  let newLocation = new Location(location);
+  let locationFormHTML = newLocation.formatLocationForm();
+  $('.main-content').append(locationFormHTML);
+  $("#locFormTitle").text("Add a New Location (j)");
+  listStates();
 }
 
 const postNewLocation = () => {
@@ -227,19 +237,45 @@ const postNewLocation = () => {
 
 ///////// EDIT LOCATION FUNCTIONS//////////
 
+Location.prototype.formatEditLocation = function() {
+  let newLocationHTML = `
+    <h3>Add a New Location</h3><br>
+    <label>Name </label> <input type="text" value="${this.name}" id="location_name"><br>
+    <label>City </label> <input type="text" value="${this.city}" id="location_city"><br>
+    <label>State </label> <select value="${this.state}" id="location_state"></select><br>
+    <label>Check if this location has lighting at night: </label>  <input type="checkbox" value="1" value="${this.lighting}" id="location_lighting"><br>
+    <label>Turf </label>
+    <select value="${this.turf}" id="location_turf"></select><br><br>
+    <input type="submit" name="commit" value="Create Location" class="btn btn-primary">
+    <a class="btn btn-primary" href="/locations">Back to Locations</a>
+  `
+  return locationFormHTML
+}
+
 const getEditLocation = (locationId) => {
   $.ajax({
     method: 'get',
     url: `/locations/${locationId}/edit.json`,
-    success: function(data) {
-      displayLocationForm();
+    success: function(location) {
+      displayEditLocationForm(location);
+      $("#locFormTitle").text(`Edit ${this.name} location (j)`)
     }
   })
 }
 
-const editLocationFormat = () => {
-  let editLocationForm = `
-    <h3>Edit Location Form</h3>
+const displayEditLocationForm = (location) => {
+  let newLocation = new Location(location);
+  let locationFormHTML = newLocation.formatLocationForm();
+  let editTitleText = newLocation.editLocationTitle()
+  debugger
+  $('.main-content').append(locationFormHTML);
+  $("#locFormTitle").html(editTitleText);
+  listStates();
+}
+
+Location.prototype.editLocationTitle = function() {
+  let editTitleText = `
+    Edit ${this.name} location (j)
   `
-  return editLocationForm
+  return editTitleText
 }
