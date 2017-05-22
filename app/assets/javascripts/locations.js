@@ -19,7 +19,7 @@ const bindLocationClickHandlers = () => {
     showLocation(url);
   });
   // Add location
-  $(".add-location").on("click", (e) => {
+  $(document).on("click", ".add-location", (e) => {
     e.preventDefault();
     history.pushState(null, null, `/locations/new`);
     clearContent();

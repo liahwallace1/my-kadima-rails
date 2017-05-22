@@ -20,7 +20,7 @@ const bindGameClickHandlers = () => {
     showGame(url);
   });
   // Add game
-  $(".add-game").on("click", (e) => {
+  $(document).on("click",".add-game", (e) => {
     e.preventDefault();
     let userId = $(".add-game").data("userid");
     history.pushState(null, null, `/users/${userId}/games/new`);

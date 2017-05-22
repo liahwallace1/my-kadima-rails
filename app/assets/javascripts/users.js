@@ -11,12 +11,12 @@ const bindUserClickHandlers = () => {
     clearContent();
     getProfile(userId);
   });
-  $(document).on("click", "button.add-game", () => {
-    let userId = $("button.add-game").data("userid");
-    history.pushState(null, null, `/users/${userId}/games/new`);
-    clearContent();
-    getNewGame(userId);
-  });
+  // $(document).on("click", "button.add-game", () => {
+  //   let userId = $("button.add-game").data("userid");
+  //   history.pushState(null, null, `/users/${userId}/games/new`);
+  //   clearContent();
+  //   getNewGame(userId);
+  // });
   $(document).on("click", "button.edit-user", () => {
     let userId = $("button.edit-user").data("userid");
     history.pushState(null, null, `/users/${userId}/edit`);
