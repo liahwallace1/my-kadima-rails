@@ -18,13 +18,19 @@ const bindLocationClickHandlers = () => {
     clearContent();
     showLocation(url);
   });
-  // New location
+  // New location form
   $(document).on("click", ".add-location", (e) => {
     e.preventDefault();
     history.pushState(null, null, `/locations/new`);
     clearContent();
     getNewLocation();
   });
+  // New Location submit
+  $('form').submit((e) => {
+    e.preventDefault();
+    var locationId = formLocationId(this);
+    postLocationForm(locationId);
+  })
   // Edit location
   $(document).on("click", "button.edit-location", (e) => {
     let locationId = e.currentTarget.dataset.id;
@@ -192,18 +198,64 @@ const listTurfs = () => {
   return $('#location_turf').append(turfOptions);
 }
 
+const formLocationId = (form) => {
+  if (form.hasClass("new_location")) {
+    let var locationId = 0
+  } else {
+    let var locationId = form.data("id")
+  }
+  return locationId
+}
+
+const postLocationForm = (locationId) => {
+  $.ajax({
+      type: (locationId === 0) ? "POST"  : "PATCH",
+      url: (locationId === 0) ? "/locations" : "/locations/" + locationId,
+      data: { game: { state: getBoard() }},
+      success: callback,
+      dataType: "json",
+  })
+}
+
+// $(function() {
+//   $('form').submit(function(e) {
+//     e.preventDefault();
+//     var values = $(this).serialize();
+//     var product = $.post('/products', values);
+//     product.done(function(data) {
+//       $('.page-heading').text("")
+//       $('form').html("")
+//       var product = data;
+//       $("#productName").text(product["name"]);
+//       $("#productInventory").text(product["inventory"]);
+//       $("#productPrice").text("$"+product["price"]);
+//       $("#productDescription").text(product["description"]);
+//     });
+//   });
+// });
+//
+// $.ajax({
+//     type: (currentGame === 0) ? "POST"  : "PATCH",
+//     url: (currentGame === 0) ? "/locations" : "/locations/" + locationId,
+//     data: { game: { state: getBoard() }},
+//     success: callback,
+//     dataType: "json",
+// })
+
 
 ///////// NEW LOCATION FUNCTIONS//////////
 
 Location.prototype.formatNewLocation = function() {
   let newLocationHTML = `
     <h3>Add a New Location</h3><br>
-    <label>Name </label> <input type="text" id="location_name"><br>
-    <label>City </label> <input type="text" id="location_city"><br>
-    <label>State </label> <select id="location_state"></select><br>
-    <label>Check if this location has lighting at night: </label>  <input type="checkbox" value="1"  id="location_lighting"><br>
-    <label>Turf </label><select  id="location_turf"></select><br><br>
-    <input type="submit" name="commit" value="Create Location" class="btn btn-primary">
+    <form class="new_location" id="new_location" action="/locations" method="post">
+      <label>Name </label> <input type="text" id="location_name"><br>
+      <label>City </label> <input type="text" id="location_city"><br>
+      <label>State </label> <select id="location_state"></select><br>
+      <label>Check if this location has lighting at night: </label>  <input type="checkbox" value="1"  id="location_lighting"><br>
+      <label>Turf </label><select  id="location_turf"></select><br><br>
+      <input type="submit" name="commit" value="Create Location" class="btn btn-primary">
+    </form>
     <a class="btn btn-primary see-locations" href="/locations">Back to Locations</a>
   `
   return newLocationHTML
@@ -227,28 +279,26 @@ const displayNewLocationForm = () => {
   listTurfs();
 }
 
-const postNewLocation = () => {
 
-}
 
 ///////// EDIT LOCATION FUNCTIONS//////////
 
 Location.prototype.formatEditLocation = function() {
   let editLocationHTML = `
     <h3>Edit ${this.name} location (j)</h3><br>
-    <label>Name </label> <input type="text" value="${this.name}" id="location_name"><br>
-    <label>City </label> <input type="text" value="${this.city}" id="location_city"><br>
-    <label>State </label> <select value="${this.state}" id="location_state"></select><br>
-    <label>Check if this location has lighting at night: </label>  <input type="checkbox" value="1" value="${this.lighting}" id="location_lighting"><br>
-    <label>Turf </label>
-    <select value="${this.turf}" id="location_turf"></select><br><br>
-    <input type="submit" name="commit" value="Edit Location" class="btn btn-primary">
+    <form class="edit_location" data-id="${this.id}" id="edit_location_${this.id}" action="/locations/${this.id}" method="post">
+      <label>Name </label> <input type="text" value="${this.name}" id="location_name"><br>
+      <label>City </label> <input type="text" value="${this.city}" id="location_city"><br>
+      <label>State </label> <select value="${this.state}" id="location_state"></select><br>
+      <label>Check if this location has lighting at night: </label>  <input type="checkbox" value="1" value="${this.lighting}" id="location_lighting"><br>
+      <label>Turf </label>
+      <select value="${this.turf}" id="location_turf"></select><br><br>
+      <input type="submit" name="commit" value="Edit Location" class="btn btn-primary">
+    </form>
     <a class="btn btn-primary see-locations" href="/locations">Back to Locations</a>
   `
   return editLocationHTML
 }
-
-
 
 const getEditLocation = (locationId) => {
   $.ajax({
