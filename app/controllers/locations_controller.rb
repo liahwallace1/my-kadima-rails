@@ -35,6 +35,10 @@ class LocationsController < ApplicationController
 
   def edit
     set_location
+    respond_to do |f|
+      f.html
+      f.json {render json: @location}
+    end
   end
 
   def update

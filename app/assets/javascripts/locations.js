@@ -27,8 +27,7 @@ const bindLocationClickHandlers = () => {
   });
   // Edit location
   $(document).on("click", "button.edit-location", (e) => {
-    debugger
-    let locationId = $(this).data("id");
+    let locationId = e.currentTarget.dataset.id;
     history.pushState(null, null, `/locations/${locationId}/edit`);
     clearContent();
     getEditLocation(locationId);
@@ -76,7 +75,7 @@ const displayLocations = (locations) => {
 
 const locationIndexStatic = () => {
   let locationIndexHTML = `
-  <h3>Locations</h3><br>
+  <h3>Kadima Locations</h3><br>
   <button class="btn btn-primary add-location">Add a Location</button><br><br>
   <ul class="locations">
   </ul>
