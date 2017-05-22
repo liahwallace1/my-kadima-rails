@@ -193,7 +193,7 @@ const listTurfs = () => {
     <option value="sand">sand</option>
     <option value="other">other</option>
   `
-  return turfOptions
+  return $('#location_turf').append(turfOptions);
 }
 
 
@@ -225,10 +225,10 @@ const getNewLocation = () => {
 
 const displayNewLocationForm = () => {
   let newLocation = new Location(location);
-  let locationFormHTML = newLocation.formatLocationForm();
-  $('.main-content').append(locationFormHTML);
-  $("#locFormTitle").text("Add a New Location (j)");
+  let newLocationHTML = newLocation.formatNewLocation();
+  $('.main-content').append(newLocationHTML);
   listStates();
+  listTurfs();
 }
 
 const postNewLocation = () => {
@@ -238,19 +238,21 @@ const postNewLocation = () => {
 ///////// EDIT LOCATION FUNCTIONS//////////
 
 Location.prototype.formatEditLocation = function() {
-  let newLocationHTML = `
-    <h3>Add a New Location</h3><br>
+  let editLocationHTML = `
+    <h3>Edit ${this.name} location (j)</h3><br>
     <label>Name </label> <input type="text" value="${this.name}" id="location_name"><br>
     <label>City </label> <input type="text" value="${this.city}" id="location_city"><br>
     <label>State </label> <select value="${this.state}" id="location_state"></select><br>
     <label>Check if this location has lighting at night: </label>  <input type="checkbox" value="1" value="${this.lighting}" id="location_lighting"><br>
     <label>Turf </label>
     <select value="${this.turf}" id="location_turf"></select><br><br>
-    <input type="submit" name="commit" value="Create Location" class="btn btn-primary">
+    <input type="submit" name="commit" value="Edit Location" class="btn btn-primary">
     <a class="btn btn-primary" href="/locations">Back to Locations</a>
   `
-  return locationFormHTML
+  return editLocationHTML
 }
+
+
 
 const getEditLocation = (locationId) => {
   $.ajax({
@@ -258,24 +260,24 @@ const getEditLocation = (locationId) => {
     url: `/locations/${locationId}/edit.json`,
     success: function(location) {
       displayEditLocationForm(location);
-      $("#locFormTitle").text(`Edit ${this.name} location (j)`)
     }
   })
 }
 
 const displayEditLocationForm = (location) => {
   let newLocation = new Location(location);
-  let locationFormHTML = newLocation.formatLocationForm();
-  let editTitleText = newLocation.editLocationTitle()
-  debugger
-  $('.main-content').append(locationFormHTML);
-  $("#locFormTitle").html(editTitleText);
-  listStates();
+  let editLocationHTML = newLocation.formatEditLocation();
+  $('.main-content').append(editLocationHTML);
+  autoSelectState(location.state);
+  autoSelectTurf(location.turf);
 }
 
-Location.prototype.editLocationTitle = function() {
-  let editTitleText = `
-    Edit ${this.name} location (j)
-  `
-  return editTitleText
+const autoSelectState = (state) => {
+  listStates();
+  $(`select option[value="${state}"]`).attr("selected","selected");
+}
+
+const autoSelectTurf = (turf) => {
+  listTurfs();
+  $(`select option[value="${turf}"]`).attr("selected","selected");
 }
