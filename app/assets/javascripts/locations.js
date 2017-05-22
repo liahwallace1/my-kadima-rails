@@ -127,15 +127,16 @@ const getNewLocation = () => {
     method: 'get',
     url: `/locations/new.json`,
     success: function(data) {
-      console.log(data)
-      let newLocationForm = newLocationFormat()
-      $('.main-content').append(newLocationForm);
+      let newLocation = new Location(location);
+      let newLocationHTML = newLocation.formatNewLocation();
+      $('.main-content').append(newLocationHTML);
+      listStates();
     }
   })
 }
 
-const newLocationFormat = () => {
-  let newLocationForm = `
+Location.prototype.formatNewLocation = function() {
+  let newLocationHTML = `
     <h3>Add a New Location</h3><br>
     <label>Name </label> <input type="text" name="${this.name}" id="location_name"><br>
     <label>City </label> <input type="text" name="${this.city}" id="location_city"><br>
@@ -152,7 +153,65 @@ const newLocationFormat = () => {
     <input type="submit" name="commit" value="Create Location" class="btn btn-primary" data-disable-with="Create Location">
     <a class="btn btn-primary" href="/locations">Back to Locations</a>
   `
-  return newLocationForm
+  return newLocationHTML
+}
+
+const listStates = () => {
+  var stateOptions = `
+    <option value=""></option>
+    <option value="AK">AK</option>
+    <option value="AL">AL</option>
+    <option value="AR">AR</option>
+    <option value="AZ">AZ</option>
+    <option value="CA">CA</option>
+    <option value="CO">CO</option>
+    <option value="CT">CT</option>
+    <option value="DC">DC</option>
+    <option value="DE">DE</option>
+    <option value="FL">FL</option>
+    <option value="GA">GA</option>
+    <option value="HI">HI</option>
+    <option value="IA">IA</option>
+    <option value="ID">ID</option>
+    <option value="IL">IL</option>
+    <option value="IN">IN</option>
+    <option value="KS">KS</option>
+    <option value="KY">KY</option>
+    <option value="LA">LA</option>
+    <option value="MA">MA</option>
+    <option value="MD">MD</option>
+    <option value="ME">ME</option>
+    <option value="MI">MI</option>
+    <option value="MN">MN</option>
+    <option value="MO">MO</option>
+    <option value="MS">MS</option>
+    <option value="MT">MT</option>
+    <option value="NC">NC</option>
+    <option value="ND">ND</option>
+    <option value="NE">NE</option>
+    <option value="NH">NH</option>
+    <option value="NJ">NJ</option>
+    <option value="NM">NM</option>
+    <option value="NV">NV</option>
+    <option value="NY">NY</option>
+    <option value="OH">OH</option>
+    <option value="OK">OK</option>
+    <option value="OR">OR</option>
+    <option value="PA">PA</option>
+    <option value="RI">RI</option>
+    <option value="SC">SC</option>
+    <option value="SD">SD</option>
+    <option value="TN">TN</option>
+    <option value="TX">TX</option>
+    <option value="UT">UT</option>
+    <option value="VA">VA</option>
+    <option value="VT">VT</option>
+    <option value="WA">WA</option>
+    <option value="WI">WI</option>
+    <option value="WV">WV</option>
+    <option value="WY">WY</option>
+  `
+  return $('#location_state').append(stateOptions);
 }
 
 ///////// NEW LOCATION FUNCTIONS//////////
