@@ -45,7 +45,8 @@ class LocationsController < ApplicationController
   def update
     set_location
     @location.update(location_params)
-    redirect_to location_path(@location), notice: "Location successfully updated."
+    # redirect_to location_path(@location), notice: "Location successfully updated."
+    render json: @location, status: 201
   end
 
   def destroy

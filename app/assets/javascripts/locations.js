@@ -35,6 +35,7 @@ const bindLocationClickHandlers = () => {
       data: $(this).serialize(),
       success: function(data) {
         var location = data;
+        debugger
         let url = `/locations/${location.id}`;
         clearContent();
         showLocation(url);
@@ -97,7 +98,7 @@ const displayLocations = (locations) => {
 const locationIndexStatic = () => {
   let locationIndexHTML = `
   <h3>Kadima Locations</h3><br>
-  <button class="btn btn-primary add-location">Add a Location</button><br><br>
+  <a class="btn btn-primary add-location" href="/locations/new">Add a Location</a><br><br>
   <ul class="locations">
   </ul>
   `
