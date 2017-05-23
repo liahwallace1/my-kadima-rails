@@ -20,13 +20,13 @@ const bindGameClickHandlers = () => {
     showGame(url);
   });
   // Add game
-  $(document).on("click",".add-game", (e) => {
-    e.preventDefault();
-    let userId = $(".add-game").data("userid");
-    history.pushState(null, null, `/users/${userId}/games/new`);
-    clearContent();
-    getNewGame(userId);
-  });
+  // $(document).on("click",".add-game", (e) => {
+  //   e.preventDefault();
+  //   let userId = $(".add-game").data("userid");
+  //   history.pushState(null, null, `/users/${userId}/games/new`);
+  //   clearContent();
+  //   getNewGame(userId);
+  // });
 }
 
 
@@ -137,21 +137,21 @@ Game.prototype.formatGameShow = function() {
 
 ///////// NEW GAME FUNCTIONS//////////
 
-const getNewGame = (userId) => {
-  $.ajax({
-    method: 'get',
-    url: `/users/${userId}/games/new.json`,
-    success: function(data) {
-      console.log(data)
-      let newGameForm = newGameFormat()
-      $('.main-content').append(newGameForm);
-    }
-  })
-}
-
-const newGameFormat = () => {
-  let newGameForm = `
-    <h3>New Game Form</h3>
-  `
-  return newGameForm
-}
+// const getNewGame = (userId) => {
+//   $.ajax({
+//     method: 'get',
+//     url: `/users/${userId}/games/new.json`,
+//     success: function(data) {
+//       console.log(data)
+//       let newGameForm = newGameFormat()
+//       $('.main-content').append(newGameForm);
+//     }
+//   })
+// }
+//
+// const newGameFormat = () => {
+//   let newGameForm = `
+//     <h3>New Game Form</h3>
+//   `
+//   return newGameForm
+// }

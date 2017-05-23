@@ -72,7 +72,6 @@ User.prototype.formatHighGameSingle = function() {
 }
 
 User.prototype.formatHighGameMulti = function() {
-  debugger
   let text = ""
   if (this.high_score_group_score) {
     text = `<strong>High Score for Group Game: </strong>${this.high_score_group_score} volleys with Players ${this.high_score_group_partners}`
