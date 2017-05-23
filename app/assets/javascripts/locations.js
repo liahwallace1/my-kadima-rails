@@ -19,19 +19,19 @@ const bindLocationClickHandlers = () => {
     showLocation(url);
   });
   // New location form
-  $(document).on("click", ".add-location", (e) => {
-    e.preventDefault();
-    var authToken = $('meta[name=csrf-token]').attr('content');
-    history.pushState(null, null, `/locations/new`);
-    clearContent();
-    getNewLocation(authToken);
-  });
+  // $(document).on("click", ".add-location", (e) => {
+  //   e.preventDefault();
+  //   var authToken = $('meta[name=csrf-token]').attr('content');
+  //   history.pushState(null, null, `/locations/new`);
+  //   clearContent();
+  //   getNewLocation(authToken);
+  // });
   // New Location submit
-  $(document).on('submit', '.new_location', (e) => {
+  $("form").on('submit', (e) => {
     e.preventDefault();
     $.ajax({
-      type: this.method,
-      url: this.action,
+      type: this.action,
+      url: this.url,
       data: $(this).serialize(),
       success: function(location) {
         console.log(location)
@@ -140,75 +140,75 @@ Location.prototype.formatLocationShow = function() {
 
 ///////// LOCATION FORMS //////////
 
-const listStates = () => {
-  var stateOptions = `
-    <option value=""></option>
-    <option value="AK">AK</option>
-    <option value="AL">AL</option>
-    <option value="AR">AR</option>
-    <option value="AZ">AZ</option>
-    <option value="CA">CA</option>
-    <option value="CO">CO</option>
-    <option value="CT">CT</option>
-    <option value="DC">DC</option>
-    <option value="DE">DE</option>
-    <option value="FL">FL</option>
-    <option value="GA">GA</option>
-    <option value="HI">HI</option>
-    <option value="IA">IA</option>
-    <option value="ID">ID</option>
-    <option value="IL">IL</option>
-    <option value="IN">IN</option>
-    <option value="KS">KS</option>
-    <option value="KY">KY</option>
-    <option value="LA">LA</option>
-    <option value="MA">MA</option>
-    <option value="MD">MD</option>
-    <option value="ME">ME</option>
-    <option value="MI">MI</option>
-    <option value="MN">MN</option>
-    <option value="MO">MO</option>
-    <option value="MS">MS</option>
-    <option value="MT">MT</option>
-    <option value="NC">NC</option>
-    <option value="ND">ND</option>
-    <option value="NE">NE</option>
-    <option value="NH">NH</option>
-    <option value="NJ">NJ</option>
-    <option value="NM">NM</option>
-    <option value="NV">NV</option>
-    <option value="NY">NY</option>
-    <option value="OH">OH</option>
-    <option value="OK">OK</option>
-    <option value="OR">OR</option>
-    <option value="PA">PA</option>
-    <option value="RI">RI</option>
-    <option value="SC">SC</option>
-    <option value="SD">SD</option>
-    <option value="TN">TN</option>
-    <option value="TX">TX</option>
-    <option value="UT">UT</option>
-    <option value="VA">VA</option>
-    <option value="VT">VT</option>
-    <option value="WA">WA</option>
-    <option value="WI">WI</option>
-    <option value="WV">WV</option>
-    <option value="WY">WY</option>
-  `
-  return $('#location_state').append(stateOptions);
-}
-
-const listTurfs = () => {
-  var turfOptions = `
-    <option value=""></option>
-    <option value="clay">clay</option>
-    <option value="concrete">concrete</option>
-    <option value="grass">grass</option>
-    <option value="sand">sand</option>
-    <option value="other">other</option>
-  `
-  return $('#location_turf').append(turfOptions);
-}
+// const listStates = () => {
+//   var stateOptions = `
+//     <option value=""></option>
+//     <option value="AK">AK</option>
+//     <option value="AL">AL</option>
+//     <option value="AR">AR</option>
+//     <option value="AZ">AZ</option>
+//     <option value="CA">CA</option>
+//     <option value="CO">CO</option>
+//     <option value="CT">CT</option>
+//     <option value="DC">DC</option>
+//     <option value="DE">DE</option>
+//     <option value="FL">FL</option>
+//     <option value="GA">GA</option>
+//     <option value="HI">HI</option>
+//     <option value="IA">IA</option>
+//     <option value="ID">ID</option>
+//     <option value="IL">IL</option>
+//     <option value="IN">IN</option>
+//     <option value="KS">KS</option>
+//     <option value="KY">KY</option>
+//     <option value="LA">LA</option>
+//     <option value="MA">MA</option>
+//     <option value="MD">MD</option>
+//     <option value="ME">ME</option>
+//     <option value="MI">MI</option>
+//     <option value="MN">MN</option>
+//     <option value="MO">MO</option>
+//     <option value="MS">MS</option>
+//     <option value="MT">MT</option>
+//     <option value="NC">NC</option>
+//     <option value="ND">ND</option>
+//     <option value="NE">NE</option>
+//     <option value="NH">NH</option>
+//     <option value="NJ">NJ</option>
+//     <option value="NM">NM</option>
+//     <option value="NV">NV</option>
+//     <option value="NY">NY</option>
+//     <option value="OH">OH</option>
+//     <option value="OK">OK</option>
+//     <option value="OR">OR</option>
+//     <option value="PA">PA</option>
+//     <option value="RI">RI</option>
+//     <option value="SC">SC</option>
+//     <option value="SD">SD</option>
+//     <option value="TN">TN</option>
+//     <option value="TX">TX</option>
+//     <option value="UT">UT</option>
+//     <option value="VA">VA</option>
+//     <option value="VT">VT</option>
+//     <option value="WA">WA</option>
+//     <option value="WI">WI</option>
+//     <option value="WV">WV</option>
+//     <option value="WY">WY</option>
+//   `
+//   return $('#location_state').append(stateOptions);
+// }
+//
+// const listTurfs = () => {
+//   var turfOptions = `
+//     <option value=""></option>
+//     <option value="clay">clay</option>
+//     <option value="concrete">concrete</option>
+//     <option value="grass">grass</option>
+//     <option value="sand">sand</option>
+//     <option value="other">other</option>
+//   `
+//   return $('#location_turf').append(turfOptions);
+// }
 
 // const formLocationId = (form) => {
 //   if (form.hasClass("new_location")) {
@@ -257,41 +257,41 @@ const listTurfs = () => {
 
 ///////// NEW LOCATION FUNCTIONS//////////
 
-Location.prototype.formatNewLocation = function(authToken) {
-  let newLocationHTML = `
-    <h3>Add a New Location (j)</h3><br>
-    <form class="new_location" id="new_location" action="/locations" method="post" accept-charset="UTF-8">
-      <input name="utf8" type="hidden" value="✓">
-      <input type="hidden" name="authenticity_token" value="${authToken}">
-      <label>Name </label> <input type="text" id="location_name"><br>
-      <label>City </label> <input type="text" id="location_city"><br>
-      <label>State </label> <select id="location_state"></select><br>
-      <label>Check if this location has lighting at night: </label>  <input type="checkbox" value="1"  id="location_lighting"><br>
-      <label>Turf </label><select  id="location_turf"></select><br><br>
-      <input type="submit" name="commit" value="Create Location" class="btn btn-primary">
-      <a class="btn btn-primary see-locations" href="/locations">Back to Locations</a>
-    </form>
-  `
-  return newLocationHTML
-}
-
-const getNewLocation = (authToken) => {
-  $.ajax({
-    method: 'get',
-    url: `/locations/new.json`,
-    success: function(data) {
-      displayNewLocationForm(authToken);
-    }
-  })
-}
-
-const displayNewLocationForm = (authToken) => {
-  let newLocation = new Location(location);
-  let newLocationHTML = newLocation.formatNewLocation(authToken);
-  $('.main-content').append(newLocationHTML);
-  listStates();
-  listTurfs();
-}
+// Location.prototype.formatNewLocation = function(authToken) {
+//   let newLocationHTML = `
+//     <h3>Add a New Location (j)</h3><br>
+//     <form class="new_location" id="new_location" action="/locations" method="post" accept-charset="UTF-8">
+//       <input name="utf8" type="hidden" value="✓">
+//       <input type="hidden" name="authenticity_token" value="${authToken}">
+//       <label>Name </label> <input type="text" id="location_name"><br>
+//       <label>City </label> <input type="text" id="location_city"><br>
+//       <label>State </label> <select id="location_state"></select><br>
+//       <label>Check if this location has lighting at night: </label>  <input type="checkbox" value="1"  id="location_lighting"><br>
+//       <label>Turf </label><select  id="location_turf"></select><br><br>
+//       <input type="submit" name="commit" value="Create Location" class="btn btn-primary">
+//       <a class="btn btn-primary see-locations" href="/locations">Back to Locations</a>
+//     </form>
+//   `
+//   return newLocationHTML
+// }
+//
+// const getNewLocation = (authToken) => {
+//   $.ajax({
+//     method: 'get',
+//     url: `/locations/new.json`,
+//     success: function(data) {
+//       displayNewLocationForm(authToken);
+//     }
+//   })
+// }
+//
+// const displayNewLocationForm = (authToken) => {
+//   let newLocation = new Location(location);
+//   let newLocationHTML = newLocation.formatNewLocation(authToken);
+//   $('.main-content').append(newLocationHTML);
+//   listStates();
+//   listTurfs();
+// }
 
 // const postNewLocation = () => {
 //   $.ajax({
@@ -306,58 +306,58 @@ const displayNewLocationForm = (authToken) => {
 
 ///////// EDIT LOCATION FUNCTIONS//////////
 
-Location.prototype.formatEditLocation = function() {
-  let editLocationHTML = `
-    <h3>Edit ${this.name} location (j)</h3><br>
-    <form class="edit_location" data-id="${this.id}" id="edit_location_${this.id}" action="/locations/${this.id}" method="post">
-      <label>Name </label> <input type="text" value="${this.name}" id="location_name"><br>
-      <label>City </label> <input type="text" value="${this.city}" id="location_city"><br>
-      <label>State </label> <select value="${this.state}" id="location_state"></select><br>
-      <label>Check if this location has lighting at night: </label>  <input type="checkbox" value="1" value="${this.lighting}" id="location_lighting"><br>
-      <label>Turf </label>
-      <select value="${this.turf}" id="location_turf"></select><br><br>
-      <input type="submit" name="commit" value="Edit Location" class="btn btn-primary">
-      <a class="btn btn-primary see-locations" href="/locations">Back to Locations</a>
-    </form>
-  `
-  return editLocationHTML
-}
-
-const getEditLocation = (locationId) => {
-  $.ajax({
-    method: 'get',
-    url: `/locations/${locationId}/edit.json`,
-    success: function(location) {
-      displayEditLocationForm(location);
-    }
-  })
-}
-
-const displayEditLocationForm = (location) => {
-  let newLocation = new Location(location);
-  let editLocationHTML = newLocation.formatEditLocation();
-  $('.main-content').append(editLocationHTML);
-  autoLocationEdit(location.state, location.lighting, location.turf);
-}
-
-const autoLocationEdit = (state, lighting, turf) => {
-  autoSelectState(state);
-  autoCheckLighting(lighting);
-  autoSelectTurf(turf);
-}
-
-const autoSelectState = (state) => {
-  listStates();
-  $(`select option[value="${state}"]`).attr("selected","selected");
-}
-
-const autoSelectTurf = (turf) => {
-  listTurfs();
-  $(`select option[value="${turf}"]`).attr("selected","selected");
-}
-
-const autoCheckLighting = (lighting) => {
-  if (lighting === true) {
-    $(`#location_lighting`).attr("checked", "checked")
-  }
-}
+// Location.prototype.formatEditLocation = function() {
+//   let editLocationHTML = `
+//     <h3>Edit ${this.name} location (j)</h3><br>
+//     <form class="edit_location" data-id="${this.id}" id="edit_location_${this.id}" action="/locations/${this.id}" method="post">
+//       <label>Name </label> <input type="text" value="${this.name}" id="location_name"><br>
+//       <label>City </label> <input type="text" value="${this.city}" id="location_city"><br>
+//       <label>State </label> <select value="${this.state}" id="location_state"></select><br>
+//       <label>Check if this location has lighting at night: </label>  <input type="checkbox" value="1" value="${this.lighting}" id="location_lighting"><br>
+//       <label>Turf </label>
+//       <select value="${this.turf}" id="location_turf"></select><br><br>
+//       <input type="submit" name="commit" value="Edit Location" class="btn btn-primary">
+//       <a class="btn btn-primary see-locations" href="/locations">Back to Locations</a>
+//     </form>
+//   `
+//   return editLocationHTML
+// }
+//
+// const getEditLocation = (locationId) => {
+//   $.ajax({
+//     method: 'get',
+//     url: `/locations/${locationId}/edit.json`,
+//     success: function(location) {
+//       displayEditLocationForm(location);
+//     }
+//   })
+// }
+//
+// const displayEditLocationForm = (location) => {
+//   let newLocation = new Location(location);
+//   let editLocationHTML = newLocation.formatEditLocation();
+//   $('.main-content').append(editLocationHTML);
+//   autoLocationEdit(location.state, location.lighting, location.turf);
+// }
+//
+// const autoLocationEdit = (state, lighting, turf) => {
+//   autoSelectState(state);
+//   autoCheckLighting(lighting);
+//   autoSelectTurf(turf);
+// }
+//
+// const autoSelectState = (state) => {
+//   listStates();
+//   $(`select option[value="${state}"]`).attr("selected","selected");
+// }
+//
+// const autoSelectTurf = (turf) => {
+//   listTurfs();
+//   $(`select option[value="${turf}"]`).attr("selected","selected");
+// }
+//
+// const autoCheckLighting = (lighting) => {
+//   if (lighting === true) {
+//     $(`#location_lighting`).attr("checked", "checked")
+//   }
+// }
