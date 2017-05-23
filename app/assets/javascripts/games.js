@@ -4,7 +4,7 @@ $(() => {
 
 const bindGameClickHandlers = () => {
   //User games index
-  $(".see-games").on("click", (e) => {
+  $(document).on("click", ".see-games", (e) => {
     e.preventDefault();
     let userId = $(".see-games").data("userid");
     history.pushState(null, null, `/users/${userId}/games`);
@@ -89,9 +89,11 @@ const noGameIndex = (username) => {
   return $('.main-content').append(noGames)
 }
 
-const displayGames = (games, username) => {
-  gameIndexStatic(username);
-  games.forEach((game) => {
+const displayGames = (data) => {
+  var games = data.games
+  gameIndexStatic(data.username);
+  Array.prototype.forEach.call(games, game => {
+    debugger
     let newGame = new Game(game)
     let gameHTML = newGame.formatGameIndex()
     $('.game-rows').append(gameHTML)
@@ -104,12 +106,11 @@ const getGames = (userId) => {
   $.ajax({
     method: 'get',
     url: `/users/${userId}/games.json`,
-    success: function(games) {
-    var username = games.username
-      if (games.games.length === 0) {
-        noGameIndex(username)
+    success: function(data) {
+      if (data.games.length === 0) {
+        noGameIndex(data.username)
       } else {
-        displayGames(games, username)
+        displayGames(data)
       }
     }
   });
