@@ -1,3 +1,5 @@
+//Add game chart to location show page to show has many relationships
+
 $(() => {
   bindLocationClickHandlers()
 })
@@ -35,7 +37,6 @@ const bindLocationClickHandlers = () => {
       data: $(this).serialize(),
       success: function(data) {
         var location = data;
-        debugger
         let url = `/locations/${location.id}`;
         clearContent();
         showLocation(url);
@@ -43,7 +44,7 @@ const bindLocationClickHandlers = () => {
     })
   })
   // Edit location
-  // $(document).on("click", "button.edit-location", function(e) {
+  // $(document).on("click", "a.edit-location", function(e) {
   //   let locationId = $(this).date("id");
   //   history.pushState(null, null, `/locations/${locationId}/edit`);
   //   clearContent();
@@ -68,9 +69,9 @@ function Location(location) {
   this.turf = location.turf
   this.games = location.games
   this.rank = location.rank
+  this.total_locations = location.total_locations
 }
 
-var total_num_locations = 0 //for Location show page
 
 //////// LOCATION INDEX FUNCTIONS //////////
 
@@ -87,7 +88,6 @@ const getLocations = () => {
 const displayLocations = (locations) => {
   let locationIndexHTML = locationIndexStatic();
   $('.main-content').html(locationIndexHTML);
-  total_num_locations = locations.length // for Location show page
   locations.forEach((location) => {
     let newLocation = new Location(location)
     let locationHTML = newLocation.formatLocationIndex()
@@ -126,6 +126,7 @@ const showLocation = (url) => {
     let newLocation = new Location(location);
     let locationShowHTML = newLocation.formatLocationShow();
     $('.main-content').append(locationShowHTML);
+    newLocation.formatLighting();
     }
   })
 }
@@ -135,11 +136,24 @@ Location.prototype.formatLocationShow = function() {
   <h3>${this.name} Information</h3>
   <h4>${this.city}, ${this.state}</h4>
   <br>
-  <p>Ranked #${this.rank} of ${total_num_locations} locations, based on number of games played there.</p>
-  <p>Turf: ${this.turf}<p>
-  <p>Lighting: ${this.lighting}</p>
+  <p>Ranked #${this.rank} of ${this.total_locations} locations, based on number of games played there.</p><br>
+  <p>Turf: ${this.turf}<p><br>
+  <p id="lighting"></p><br>
+  <br>
+  <a href="/locations/${this.id}/edit" class="btn btn-primary edit-location">Edit Location</a>
+  <a href="/locations" class="btn btn-primary see-locations">See All Locations</a>
   `
   return locationShowHTML
+}
+
+Location.prototype.formatLighting = function() {
+  let text = ""
+  if (this.lighting) {
+    text = `<strong>This location has lighting at night!</strong>`
+  } else {
+    text = `This location is NOT lit at night.`
+  }
+  return $('#lighting').html(text)
 }
 
 ///////// LOCATION FORMS //////////
