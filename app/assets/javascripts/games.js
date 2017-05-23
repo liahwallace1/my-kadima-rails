@@ -1,3 +1,5 @@
+//How do I show the ordinalized game number for this user in Game show page?
+
 $(() => {
   bindGameClickHandlers()
 })
@@ -42,6 +44,7 @@ function Game(game) {
   this.location = game.location
   this.played_with = game.played_with
   this.current_username = game.current_username
+  this.game_number = game.game_number
 }
 
 /////// USER GAMES INDEX FUNCTIONS /////////
@@ -106,7 +109,6 @@ const getGames = (userId) => {
     method: 'get',
     url: `/users/${userId}/games.json`,
     success: function(data) {
-      debugger
       if (Object.keys(data).length === 2) {
         noGameIndex(data.username)
       } else {
@@ -132,6 +134,18 @@ const showGame = (url) => {
 Game.prototype.formatGameShow = function() {
   let gameShowHTML = `
   <h3>Game Data</h3>
+  <br>
+  <ul>
+    <li><strong>Date Played: </strong>${this.date_played}</li>
+    <li><strong>Volley Total: </strong>${this.volley_total}</li>
+    <li><strong>Location: </strong>${this.location.name}</li>
+    <li><strong>Game Type: </strong>${this.game_type}</li>
+    <li><strong>Distance: </strong>${this.distance}</li>
+    <li><strong>Players: </strong>${this.played_with}</li>
+  </ul>
+  <br>
+  <br>
+  <a href="/games/${this.id}/edit" class="btn btn-primary edit-game">Edit Game"</a>  <a href="#" class="btn btn-primary see-games">See My Games"</a>
   `
   return gameShowHTML
 }

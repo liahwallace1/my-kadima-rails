@@ -91,29 +91,27 @@ const getProfile = (userId) => {
       let newUser = new User(user);
       let profileHTML = newUser.formatProfile();
       $('.main-content').append(profileHTML);
-      newUser.formatHighGameSingle();
-      newUser.formatHighGameMulti();
     }
   });
 }
 
 //////// USER EDIT FUNCTIONS //////////
 
-const getEditUser = (userId) => {
-  $.ajax({
-    method: 'get',
-    url: `/users/${userId}/edit.json`,
-    success: function(user) {
-    let newUser = new User(user);
-    let editHTML = newUser.formatEditPage();
-    $('.main-content').append(editHTML);
-    }
-  });
-}
-
-User.prototype.formatEditPage = function() {
-  let editHTML = `
-  <h3>Edit your MyKadima account:</h3><br>
-  `
-  return editHTML
-}
+// const getEditUser = (userId) => {
+//   $.ajax({
+//     method: 'get',
+//     url: `/users/${userId}/edit.json`,
+//     success: function(user) {
+//     let newUser = new User(user);
+//     let editHTML = newUser.formatEditPage();
+//     $('.main-content').append(editHTML);
+//     }
+//   });
+// }
+//
+// User.prototype.formatEditPage = function() {
+//   let editHTML = `
+//   <h3>Edit your MyKadima account:</h3><br>
+//   `
+//   return editHTML
+// }
