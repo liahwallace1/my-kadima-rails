@@ -29,14 +29,15 @@ const bindLocationClickHandlers = () => {
   // New Location submit non-AJAX form
   $(document).on('submit', 'form', function(e) {
     e.preventDefault();
-    debugger
     $.ajax({
       type: this.method,
       url: this.action,
       data: $(this).serialize(),
-      success: function(location) {
-        debugger
-        console.log(location)
+      success: function(data) {
+        var location = data;
+        let url = `/locations/${location.id}`;
+        clearContent();
+        showLocation(url);
       }
     })
   })

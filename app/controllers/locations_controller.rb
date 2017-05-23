@@ -26,10 +26,8 @@ class LocationsController < ApplicationController
   def create
     @location = Location.new(location_params)
     if @location.save
-      respond_to do |f|
-        f.html {redirect_to location_path(@location), notice: "Location successfully created."}
-        f.json (render json: @location, status: 201)
-      end
+      # redirect_to location_path(@location), notice: "Location successfully created."
+      render json: @location, status: 201
     else
       flash[:error] = @location.errors.full_messages.uniq.join('; ')
       render :new

@@ -9,5 +9,5 @@
   <%= f.check_box :lighting %><br>
   <%= f.label :turf %>
   <%= f.select(:turf, turf_options, :include_blank => true) %><br><br>
-  <%= f.submit :class => "btn btn-primary submit" %>  <%= link_to "Back to Locations", locations_path, class: "btn btn-primary" %>
+  <%= f.submit :class => "btn btn-primary submit" %>  <%= link_to "Back to Locations", locations_path, class: "btn btn-primary see-locations" %>
 <% end %>
