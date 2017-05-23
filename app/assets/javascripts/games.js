@@ -57,7 +57,7 @@ Game.prototype.formatGameIndex = function() {
       <td>${this.played_with}</td>
     </tr>
   `
-  $('h3#table-heading').html(`${this.current_username}'s Games'`)
+  $('h3#table-heading').html(`${this.current_username}'s Games`)
   return gameHTML
 }
 
@@ -93,10 +93,8 @@ const noGameIndex = (username) => {
 }
 
 const displayGames = (data) => {
-  var games = data.games
   gameIndexStatic(data.username);
-  Array.prototype.forEach.call(games, game => {
-    debugger
+  data.forEach(game => {
     let newGame = new Game(game)
     let gameHTML = newGame.formatGameIndex()
     $('.game-rows').append(gameHTML)
@@ -108,7 +106,8 @@ const getGames = (userId) => {
     method: 'get',
     url: `/users/${userId}/games.json`,
     success: function(data) {
-      if (data.games.length === 0) {
+      debugger
+      if (Object.keys(data).length === 2) {
         noGameIndex(data.username)
       } else {
         displayGames(data)
