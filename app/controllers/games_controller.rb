@@ -5,9 +5,16 @@ class GamesController < ApplicationController
     if params[:user_id]
       @games = User.find(params[:user_id]).games
       @username = User.find(params[:user_id]).username
-      respond_to do |f|
-        f.html
-        f.json {render json: {games: @games, username: @username}}
+      if @games.length > 0
+        respond_to do |f|
+          f.html
+          f.json {render json: @games}
+        end
+      else
+        respond_to do |f|
+          f.html
+          f.json {render json: {games: @games, username: @username}}
+        end
       end
     else
       @games = Game.all

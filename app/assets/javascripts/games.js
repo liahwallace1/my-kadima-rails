@@ -41,6 +41,7 @@ function Game(game) {
   this.volley_total = game.volley_total
   this.location = game.location
   this.played_with = game.played_with
+  this.current_username = game.current_username
 }
 
 /////// USER GAMES INDEX FUNCTIONS /////////
@@ -56,12 +57,13 @@ Game.prototype.formatGameIndex = function() {
       <td>${this.played_with}</td>
     </tr>
   `
+  $('h3#table-heading').html(`${this.current_username}'s Games'`)
   return gameHTML
 }
 
-const gameIndexStatic = (username) => {
+const gameIndexStatic = function() {
   let emptyTable = `
-  <h3>${username}'s Games</h3>
+  <h3 id="table-heading"></h3>
     <div class="table-responsive">
       <table class="table table-hover">
         <thead>
@@ -86,6 +88,7 @@ const noGameIndex = (username) => {
   let noGames = `
   <div><p>No games.</p></div>
   `
+  $('h3#table-heading').html(`${username}'s Games`)
   return $('.main-content').append(noGames)
 }
 
@@ -101,8 +104,6 @@ const displayGames = (data) => {
 }
 
 const getGames = (userId) => {
-  // fetch(`/users/${userId}/games.json`)
-  //   .then(res => console.log(res))
   $.ajax({
     method: 'get',
     url: `/users/${userId}/games.json`,
