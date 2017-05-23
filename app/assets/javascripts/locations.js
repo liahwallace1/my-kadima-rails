@@ -19,37 +19,39 @@ const bindLocationClickHandlers = () => {
     showLocation(url);
   });
   // New location form
-  // $(document).on("click", ".add-location", (e) => {
+  // $(document).on("click", ".add-location", function(e) {
   //   e.preventDefault();
   //   var authToken = $('meta[name=csrf-token]').attr('content');
   //   history.pushState(null, null, `/locations/new`);
   //   clearContent();
   //   getNewLocation(authToken);
   // });
-  // New Location submit
-  $("form").on('submit', (e) => {
+  // New Location submit non-AJAX form
+  $(document).on('submit', 'form', function(e) {
     e.preventDefault();
+    debugger
     $.ajax({
-      type: this.action,
-      url: this.url,
+      type: this.method,
+      url: this.action,
       data: $(this).serialize(),
       success: function(location) {
+        debugger
         console.log(location)
       }
     })
   })
   // Edit location
-  $(document).on("click", "button.edit-location", (e) => {
-    let locationId = e.currentTarget.dataset.id;
-    history.pushState(null, null, `/locations/${locationId}/edit`);
-    clearContent();
-    getEditLocation(locationId);
-  });
+  // $(document).on("click", "button.edit-location", function(e) {
+  //   let locationId = $(this).date("id");
+  //   history.pushState(null, null, `/locations/${locationId}/edit`);
+  //   clearContent();
+  //   getEditLocation(locationId);
+  // });
   // Edit Location submit
-  $(document).on("submit", "form.edit_location", (e) => {
-    e.preventDefault();
-    console.log(this)
-  })
+  // $(document).on("submit", "form.edit_location", (e) => {
+  //   e.preventDefault();
+  //   console.log(this)
+  // })
 }
 
 
@@ -106,7 +108,7 @@ Location.prototype.formatLocationIndex = function() {
   <li data-id="${this.id}">
     <a href="/locations/${this.id}" class="location-click"><strong>${this.name}</strong></a><br>
     ${this.city}, ${this.state}<br>
-    <button class="btn btn-xs btn-default edit-location" data-id="${this.id}">Edit</button>
+    <a class="btn btn-xs btn-default edit-location" href="/locations/${this.id}/edit" data-id="${this.id}">Edit</a>
   </li><br>
   `
   return locationHTML
@@ -209,7 +211,7 @@ Location.prototype.formatLocationShow = function() {
 //   `
 //   return $('#location_turf').append(turfOptions);
 // }
-
+//
 // const formLocationId = (form) => {
 //   if (form.hasClass("new_location")) {
 //     let locationId = 0
@@ -263,11 +265,11 @@ Location.prototype.formatLocationShow = function() {
 //     <form class="new_location" id="new_location" action="/locations" method="post" accept-charset="UTF-8">
 //       <input name="utf8" type="hidden" value="✓">
 //       <input type="hidden" name="authenticity_token" value="${authToken}">
-//       <label>Name </label> <input type="text" id="location_name"><br>
-//       <label>City </label> <input type="text" id="location_city"><br>
-//       <label>State </label> <select id="location_state"></select><br>
-//       <label>Check if this location has lighting at night: </label>  <input type="checkbox" value="1"  id="location_lighting"><br>
-//       <label>Turf </label><select  id="location_turf"></select><br><br>
+//       <label>Name </label> <input type="text" name="location[name]" id="location_name"><br>
+//       <label>City </label> <input type="text" name="location[city]" id="location_city"><br>
+//       <label>State </label> <select name="location[state]" id="location_state"></select><br>
+//       <label>Check if this location has lighting at night: </label>  <input type="checkbox" name="location[lighting]" value="1"  id="location_lighting"><br>
+//       <label>Turf </label><select name="location[turf]" id="location_turf"></select><br><br>
 //       <input type="submit" name="commit" value="Create Location" class="btn btn-primary">
 //       <a class="btn btn-primary see-locations" href="/locations">Back to Locations</a>
 //     </form>
