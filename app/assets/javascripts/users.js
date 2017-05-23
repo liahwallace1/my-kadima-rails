@@ -4,7 +4,7 @@ $(() => {
 
 const bindUserClickHandlers = () => {
   // profile page
-  $(".profile").on("click", (e) => {
+  $(document).on("click", ".profile", (e) => {
     e.preventDefault();
     let userId = $(".profile").data("userid");
     history.pushState(null, null, `/users/${userId}`);
@@ -68,17 +68,18 @@ User.prototype.formatHighGameSingle = function() {
   } else {
     text = `<strong>High Score for One-on-One Game: </strong>No one-on-one games yet!`
   }
-  return $('#high-score-multi').html(text)
+  return $('#high-score-single').html(text)
 }
 
 User.prototype.formatHighGameMulti = function() {
+  debugger
   let text = ""
-  if (this.high_score_multi_score) {
+  if (this.high_score_group_score) {
     text = `<strong>High Score for Group Game: </strong>${this.high_score_group_score} volleys with Players ${this.high_score_group_partners}`
   } else {
     text = `<strong>High Score for Group Game: </strong>No multi-player games yet!`
   }
-  return $('#high-score-single').html(text)
+  return $('#high-score-multi').html(text)
 }
 
 const getProfile = (userId) => {
