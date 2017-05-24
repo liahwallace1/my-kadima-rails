@@ -24,12 +24,12 @@ const bindGameClickHandlers = () => {
   // Game form POST
   $(document).on('submit', 'form.game-form', function(e) {
     e.preventDefault();
-    debugger
     $.ajax({
       type: this.method,
       url: this.action,
       data: $(this).serialize(),
       success: function(data) {
+        debugger
         var game = data;
         let url = `/games/${game.id}`;
         clearContent();

@@ -46,7 +46,8 @@ class GamesController < ApplicationController
       @game.played_with = params[:game][:played_with]
       creator_is_player
       @game.save
-      redirect_to game_path(@game), notice: "Game successfully created."
+      render json: @game, status: 201
+      # redirect_to game_path(@game), notice: "Game successfully created."
     else
       flash[:error] = @game.errors.full_messages.uniq.join('; ')
       render :new
@@ -67,7 +68,8 @@ class GamesController < ApplicationController
     @game.location = Location.find_or_create_by(name: params[:game][:location][:name])
     @game.played_with = params[:game][:played_with]
     @game.save
-    redirect_to game_path(@game), notice: "Game successfully updated."
+    render json: @game, status: 201
+    # redirect_to game_path(@game), notice: "Game successfully updated."
   end
 
   def destroy
