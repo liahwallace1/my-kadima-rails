@@ -55,6 +55,10 @@ class GamesController < ApplicationController
 
   def edit
     set_game
+    respond_to do |f|
+      f.html
+      f.json {render json: @game}
+    end
   end
 
   def update

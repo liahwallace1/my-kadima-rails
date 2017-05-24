@@ -28,8 +28,8 @@ const bindLocationClickHandlers = () => {
   //   clearContent();
   //   getNewLocation(authToken);
   // });
-  // New Location submit non-AJAX form
-  $(document).on('submit', 'form', function(e) {
+  // Location submit non-AJAX form
+  $(document).on('submit', 'form.location-form', function(e) {
     e.preventDefault();
     $.ajax({
       type: this.method,

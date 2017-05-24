@@ -1,4 +1,4 @@
-<%= form_for game do |f| %>
+<%= form_for game, {:class => "game-form"} do |f| %>
 
   <%= f.label :date_played %>
   <%= f.date_select(:date_played, :order => [:month, :day, :year]) %><br><br>
@@ -25,5 +25,5 @@
   <%= f.label :distance, "Distance (short < 7ft, long > 15ft)" %>
   <%= f.select(:distance, distance_options, :include_blank => true) %><br><br>
 
-  <%= f.submit :class => "btn btn-primary" %>  <%= link_to "Back to Profile", user_path(current_user), class: "btn btn-primary profile" %>
+  <%= f.submit :class => "btn btn-primary add-game" %>  <%= link_to "Back to Profile", user_path(current_user), class: "btn btn-primary profile" %>
 <% end %>

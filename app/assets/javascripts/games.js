@@ -21,7 +21,23 @@ const bindGameClickHandlers = () => {
     clearContent();
     showGame(url);
   });
-  // Add game
+  // Game form POST
+  $(document).on('submit', 'form.game-form', function(e) {
+    e.preventDefault();
+    debugger
+    $.ajax({
+      type: this.method,
+      url: this.action,
+      data: $(this).serialize(),
+      success: function(data) {
+        var game = data;
+        let url = `/games/${game.id}`;
+        clearContent();
+        showGame(url);
+      }
+    })
+  })
+  // Add game get
   // $(document).on("click",".add-game", (e) => {
   //   e.preventDefault();
   //   let userId = $(".add-game").data("userid");
@@ -145,7 +161,7 @@ Game.prototype.formatGameShow = function() {
   </ul>
   <br>
   <br>
-  <a href="/games/${this.id}/edit" class="btn btn-primary edit-game">Edit Game"</a>  <a href="#" class="btn btn-primary see-games">See My Games"</a>
+  <a href="/games/${this.id}/edit" class="btn btn-primary edit-game">Edit Game</a>  <a href="#" class="btn btn-primary see-games">See My Games</a>
   `
   return gameShowHTML
 }

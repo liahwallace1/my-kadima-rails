@@ -15,6 +15,7 @@ const bindStaticClickHandlers = () => {
 
 const clearContent = () => {
   $('.main-content').html("")
+  $('.messages').html("")
 }
 
 //////// HOME PAGE //////////
