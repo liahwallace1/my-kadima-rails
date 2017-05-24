@@ -58,7 +58,7 @@ User.prototype.formatProfile = function() {
   <br>
   <br>
   <br>
-  <button class="btn btn-warning edit-user" data-userid="${this.id}">Edit User Profile</button>
+  <a href="/users/${this.id}/edit" class="btn btn-warning edit-user" data-userid="${this.id}">Edit User Profile</a>
   `
   return profileHTML
 }

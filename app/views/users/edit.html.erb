@@ -1,5 +1,6 @@
 <h3>Edit your MyKadima account:</h3><br>
 
-<%= render 'form' %>
+<%= render 'form' %><br />
+<%= link_to "Back to Profile", user_path(@user), :class => "btn btn-primary profile" %>
 <!-- <%= link_to "Delete User", user_path(@user), method: :delete, data: { confirm: 'Are you certain you want to delete this?' }, :class => "btn btn-warning center" %>
 <p><i>* WARNING: Clicking this button will destroy your user and all of your user information!</i></p> -->
