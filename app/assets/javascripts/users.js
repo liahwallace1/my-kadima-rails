@@ -43,7 +43,7 @@ function User(user) {
 User.prototype.formatProfile = function() {
   let profileHTML = `
   <h3>${this.username}'s Player Profile</h3><br>
-  <button class="btn btn-primary add-game" data-userid="${this.id}">Add a New Game</button>
+  <a href="/users/${this.id}/games/new" class="btn btn-primary add-game" data-userid="${this.id}">Add a New Game</a>
   <h3>Your Stats:</h3>
 
   <p id="high-score-single"><strong>High Score for One-on-One Game: </strong>${this.one_on_one_stat}</p><br>
