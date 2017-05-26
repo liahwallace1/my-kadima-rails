@@ -136,6 +136,7 @@ Location.prototype.formatLocationShow = function() {
   <h3>${this.name} Information</h3>
   <h4>${this.city}, ${this.state}</h4>
   <br>
+  <p>There have been ${this.games.length} games played at ${this.name}.</p>
   <p>Ranked #${this.rank} of ${this.total_locations} locations, based on number of games played there.</p><br>
   <p>Turf: ${this.turf}<p><br>
   <p id="lighting"></p><br>
