@@ -29,7 +29,6 @@ const bindGameClickHandlers = () => {
       url: this.action,
       data: $(this).serialize(),
       success: function(data) {
-        debugger
         var game = data;
         let url = `/games/${game.id}`;
         clearContent();
