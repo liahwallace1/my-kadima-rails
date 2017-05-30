@@ -6,13 +6,13 @@ $(() => {
 
 const bindGameClickHandlers = () => {
   //User games index
-  $(document).on("click", ".see-games", (e) => {
-    e.preventDefault();
-    let userId = $(".see-games").data("userid");
-    history.pushState(null, null, `/users/${userId}/games`);
-    clearContent();
-    getGames(userId);
-  });
+  // $(document).on("click", ".see-games", (e) => {
+  //   e.preventDefault();
+  //   let userId = $(".see-games").data("userid");
+  //   history.pushState(null, null, `/users/${userId}/games`);
+  //   clearContent();
+  //   getGames(userId);
+  // });
   // Game show
   $(document).on("click", ".clickable-row", function(e)  {
     e.preventDefault();
@@ -21,6 +21,10 @@ const bindGameClickHandlers = () => {
     clearContent();
     showGame(url);
   });
+  // Add game form on index
+  // $('#index-add-game').on("click", function(e) {
+  //   $(".hide-form").toggleClass("hide-form")
+  // })
   // Game form POST
   $(document).on('submit', 'form.game-form', function(e) {
     e.preventDefault();
@@ -30,9 +34,10 @@ const bindGameClickHandlers = () => {
       data: $(this).serialize(),
       success: function(data) {
         var game = data;
-        let url = `/games/${game.id}`;
-        clearContent();
-        showGame(url);
+        addGameRow(game);
+        // let url = `/games/${game.id}`;
+        // clearContent();
+        // showGame(url);
       }
     })
   })
@@ -132,6 +137,18 @@ const getGames = (userId) => {
     }
   });
 }
+
+const addGameRow = (game) => {
+  clearForm();
+  let newGame = new Game(game)
+  let gameHTML = newGame.formatGameIndex()
+  $('.game-rows').append(gameHTML)
+}
+
+const clearForm = () => {
+  $('form.game-form').trigger('reset')
+  $('a.show-form').trigger('click')
+}
 ///////// GAME SHOW FUNCTIONS//////////
 
 const showGame = (url) => {
@@ -160,7 +177,7 @@ Game.prototype.formatGameShow = function() {
   </ul>
   <br>
   <br>
-  <a href="/games/${this.id}/edit" class="btn btn-primary edit-game">Edit Game</a>  <a href="#" class="btn btn-primary see-games">See My Games</a>
+  <a href="/games/${this.id}/edit" class="btn btn-primary edit-game">Edit Game</a>
   `
   return gameShowHTML
 }

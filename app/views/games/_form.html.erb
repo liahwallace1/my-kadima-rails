@@ -25,5 +25,5 @@
   <%= f.label :distance, "Distance (short < 7ft, long > 15ft)" %>
   <%= f.select(:distance, distance_options, :include_blank => true) %><br><br>
 
-  <%= f.submit :class => "btn btn-primary" %>  <%= link_to "Back to Games", user_games_path(current_user), class: "btn btn-primary see-games" %>
+  <%= f.submit :class => "btn btn-primary" %>  
 <% end %>

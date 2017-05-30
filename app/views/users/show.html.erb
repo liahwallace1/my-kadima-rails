@@ -1,7 +1,7 @@
 <h3><%= @user.username %>'s Player Profile</h3><br>
 
 
-<%= link_to "Add a New Game", new_user_game_path(@user), :class => "btn btn-primary" %>
+<%= link_to "See My Games", user_games_path(current_user), :data => {:userid => current_user.id}, :class => "btn btn-primary see-games" %>
 <br>
 
 <h3>Your Stats:</h3>
