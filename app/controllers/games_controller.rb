@@ -29,12 +29,12 @@ class GamesController < ApplicationController
     end
   end
 
-  # def new
-  #   respond_to do |f|
-  #     f.html
-  #     f.json {render json: Game.new}
-  #   end
-  # end
+  def new
+    respond_to do |f|
+      f.html
+      f.json {render json: Game.new}
+    end
+  end
 
   def create
     location = Location.find_or_create_by(name: params[:game][:location][:name])

@@ -1,6 +1,6 @@
 <h3>Edit a Game</h3><br>
 
-<%= render :partial => 'form', :locals => {game: @game} %>
+<%= render :partial => 'form', :locals => {game: @game, myclass: "standard"} %>
 <%= link_to "Back to Games", user_games_path(current_user), class: "btn btn-primary see-games" %><br>
 
 

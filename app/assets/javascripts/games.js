@@ -21,12 +21,8 @@ const bindGameClickHandlers = () => {
     clearContent();
     showGame(url);
   });
-  // Add game form on index
-  // $('#index-add-game').on("click", function(e) {
-  //   $(".hide-form").toggleClass("hide-form")
-  // })
-  // Game form POST
-  $(document).on('submit', 'form.game-form', function(e) {
+  // Game form POST from Index
+  $(document).on('submit', 'form.in-index', function(e) {
     e.preventDefault();
     $.ajax({
       type: this.method,
@@ -35,9 +31,21 @@ const bindGameClickHandlers = () => {
       success: function(data) {
         var game = data;
         addGameRow(game);
-        // let url = `/games/${game.id}`;
-        // clearContent();
-        // showGame(url);
+      }
+    })
+  })
+  // Game Form post in New or Edit
+  $(document).on('submit', 'form.standard', function(e) {
+    e.preventDefault();
+    $.ajax({
+      type: this.method,
+      url: this.action,
+      data: $(this).serialize(),
+      success: function(data) {
+        var game = data;
+        let url = `/games/${game.id}`;
+        clearContent();
+        showGame(url);
       }
     })
   })
@@ -146,8 +154,9 @@ const addGameRow = (game) => {
 }
 
 const clearForm = () => {
-  $('form.game-form').trigger('reset')
-  $('a.show-form').trigger('click')
+  $('form.in-index').trigger('reset');
+  $("input[type=submit]").removeAttr("disabled");
+  $('a.show-form').trigger('click');
 }
 ///////// GAME SHOW FUNCTIONS//////////
 

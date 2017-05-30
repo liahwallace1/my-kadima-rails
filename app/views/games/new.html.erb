@@ -1,4 +1,4 @@
 <h3>Add a New Game</h3><br>
 
-<%= render :partial => 'form', :locals => {game: Game.new} %>
+<%= render :partial => 'form', :locals => {game: Game.new, myclass: "standard"} %>
 <%= link_to "Back to Games", user_games_path(current_user), class: "btn btn-primary see-games" %>
