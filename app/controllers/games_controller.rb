@@ -4,6 +4,18 @@ class GamesController < ApplicationController
   def index
     if params[:user_id]
       @games = User.find(params[:user_id]).games
+      @username = User.find(params[:user_id]).username
+      if @games.length > 0
+        respond_to do |f|
+          f.html
+          f.json {render json: @games}
+        end
+      else
+        respond_to do |f|
+          f.html
+          f.json {render json: {games: @games, username: @username}}
+        end
+      end
     else
       @games = Game.all
     end
@@ -11,9 +23,17 @@ class GamesController < ApplicationController
 
   def show
     set_game
+    respond_to do |f|
+      f.html
+      f.json {render json: @game}
+    end
   end
 
   def new
+    respond_to do |f|
+      f.html
+      f.json {render json: Game.new}
+    end
   end
 
   def create
@@ -26,7 +46,8 @@ class GamesController < ApplicationController
       @game.played_with = params[:game][:played_with]
       creator_is_player
       @game.save
-      redirect_to game_path(@game), notice: "Game successfully created."
+      render json: @game, status: 201
+      # redirect_to game_path(@game), notice: "Game successfully created."
     else
       flash[:error] = @game.errors.full_messages.uniq.join('; ')
       render :new
@@ -35,6 +56,10 @@ class GamesController < ApplicationController
 
   def edit
     set_game
+    respond_to do |f|
+      f.html
+      f.json {render json: @game}
+    end
   end
 
   def update
@@ -43,7 +68,8 @@ class GamesController < ApplicationController
     @game.location = Location.find_or_create_by(name: params[:game][:location][:name])
     @game.played_with = params[:game][:played_with]
     @game.save
-    redirect_to game_path(@game), notice: "Game successfully updated."
+    render json: @game, status: 201
+    # redirect_to game_path(@game), notice: "Game successfully updated."
   end
 
   def destroy

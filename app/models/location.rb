@@ -21,7 +21,11 @@ class Location < ApplicationRecord
   end
 
   def rank
-    self.class.rank_list.index(self) + 1
+    if self.id
+      self.class.rank_list.index(self) + 1
+    else
+      nil
+    end
   end
 
 end

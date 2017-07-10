@@ -1,5 +1,7 @@
 <h3>Edit a Game</h3><br>
 
-<%= render :partial => 'form', :locals => {game: @game} %><br>
+<%= render :partial => 'form', :locals => {game: @game, myclass: "standard"} %>
+<%= link_to "Back to Games", user_games_path(current_user), class: "btn btn-primary see-games" %><br>
+
 
 <%= link_to "Delete Game", game_path(@game), method: :delete, data: { confirm: 'Are you certain you want to delete this game?' }, :class => "btn btn-danger center" %>

@@ -1,4 +1,4 @@
-<%= form_for game do |f| %>
+<%= form_for game, :html => {:class => ["game-form", myclass]} do |f| %>
 
   <%= f.label :date_played %>
   <%= f.date_select(:date_played, :order => [:month, :day, :year]) %><br><br>
@@ -8,7 +8,7 @@
 
   <%= f.fields_for :location do |loc| %>
     <%= loc.label :name, "Location" %>
-      <%= loc.text_field :name, value: game.location.name, list: 'locations_autocomplete' %>
+      <%= loc.text_field :name, value: (game.location.name if game.location), list: 'locations_autocomplete' %>
         <datalist id="locations_autocomplete">
           <% Location.all.each do |location| %>
             <option value="<%= location.name %>"><%= location.city %>, <%= location.state %></option>
@@ -25,5 +25,5 @@
   <%= f.label :distance, "Distance (short < 7ft, long > 15ft)" %>
   <%= f.select(:distance, distance_options, :include_blank => true) %><br><br>
 
-  <%= f.submit :class => "btn btn-primary" %>  <%= link_to "Back to Profile", user_path(current_user), class: "btn btn-primary" %>
+  <%= f.submit :class => "btn btn-primary" %>
 <% end %>

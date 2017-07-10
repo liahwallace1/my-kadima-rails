@@ -7,6 +7,7 @@ MyKadima is a RoR-based application that allows users to keep track of their Kad
   - Add/View Kadima games you are a part of
   - See your Kadima stats such as top scores, favorite partner, and favorite location
   - Add/View Kadima locations including important information about turf and lighting
+  - Fast DOM rendering via jQuery AJAX implementation.
 
 ## Video Walkthrough
   [![IMAGE ALT TEXT](http://i.imgur.com/uHsVlgW.png)](https://github.com/liahwallace1/my-kadima-rails "MyKadima Walkthrough")
@@ -50,6 +51,7 @@ MyKadima is a RoR-based application that allows users to keep track of their Kad
 
   MyKadima uses a number of open source projects to work properly:
   * [Ruby on Rails] - A web-application framework that includes everything needed to create database-backed web applications according to the Model-View-Controller (MVC) pattern.
+  * [jQuery] - jQuery is a fast, small, and feature-rich JavaScript library that supplements front end development by simplifying things like HTML DOM manipulation, event handling, and Ajax.
   * [Active Record] - Connects classes to relational database tables.
   * [Bcrypt] - A sophisticated and secure hash algorithm designed by The OpenBSD project.
 
@@ -63,6 +65,7 @@ MyKadima is a RoR-based application that allows users to keep track of their Kad
    - Adding map to location
    - Add additional styling with Javascript
    - Allow games to include non-users as partners
+   - Submit forms rendered with Ajax.
 
 ## Contributing
 
@@ -77,3 +80,4 @@ MyKadima is a RoR-based application that allows users to keep track of their Kad
      [bcrypt]: <https://rubygems.org/gems/bcrypt/versions/3.1.11>
      [Active Record]: <https://github.com/rails/rails/tree/master/activerecord>
      [Ruby on Rails]: <https://github.com/rails/rails>
+     [jQuery]: <https://jquery.com/>

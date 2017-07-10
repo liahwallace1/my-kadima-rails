@@ -5,6 +5,10 @@ class UsersController < ApplicationController
     if !logged_in?
       redirect_to root_path
     end
+    respond_to do |f|
+      f.html
+      f.json {render json: @user}
+    end
   end
 
   def new
@@ -24,6 +28,10 @@ class UsersController < ApplicationController
 
   def edit
     set_user
+    respond_to do |f|
+      f.html
+      f.json {render json: @user}
+    end
   end
 
   def update
