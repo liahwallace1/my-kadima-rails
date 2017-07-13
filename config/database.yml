@@ -6,7 +6,8 @@
 #
 default: &default
   adapter: postgresql
-  pool: 5
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
 development:
@@ -23,3 +24,5 @@ test:
 production:
   <<: *default
   database: my-kadima-rails_production
+  username: my-kadima-rails
+  password: <%= ENV['MY-KADIMA-RAILS_DATABASE_PASSWORD'] %>
