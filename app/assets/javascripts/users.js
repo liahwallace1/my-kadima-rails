@@ -11,12 +11,7 @@ const bindUserClickHandlers = () => {
     clearContent();
     getProfile(userId);
   });
-  // $(document).on("click", "button.edit-user", () => {
-  //   let userId = $("button.edit-user").data("userid");
-  //   history.pushState(null, null, `/users/${userId}/edit`);
-  //   clearContent();
-  //   getEditUser(userId);
-  // });
+
 }
 
 
@@ -27,10 +22,6 @@ function User(user) {
   this.username = user.username
   this.games = user.games
   this.locations = user.locations
-  // this.high_score_single_score = user.high_score_single_score
-  // this.high_score_single_partner = user.high_score_single_partner
-  // this.high_score_group_score = user.high_score_group_score
-  // this.high_score_group_partners = user.high_score_group_partners
   this.one_on_one_stat = user.one_on_one_stat
   this.group_stat = user.group_stat
   this.frequent_partner_name = user.frequent_partner_name
@@ -39,8 +30,6 @@ function User(user) {
 }
 
 //////// USER SHOW FUNCTIONS //////////
-// <a href="/users/${this.id}/games/new" class="btn btn-primary add-game" data-userid="${this.id}">Add a New Game</a>
-
 
 User.prototype.formatProfile = function() {
   let profileHTML = `
@@ -65,25 +54,6 @@ User.prototype.formatProfile = function() {
   return profileHTML
 }
 
-// User.prototype.formatHighGameSingle = function() {
-//   let text = ""
-//   if (this.high_score_single_score) {
-//     text = `<strong>High Score for One-on-One Game: </strong>${this.high_score_single_score} volleys with Player ${this.high_score_single_partner}`
-//   } else {
-//     text = `<strong>High Score for One-on-One Game: </strong>No one-on-one games yet!`
-//   }
-//   return $('#high-score-single').html(text)
-// }
-//
-// User.prototype.formatHighGameMulti = function() {
-//   let text = ""
-//   if (this.high_score_group_score) {
-//     text = `<strong>High Score for Group Game: </strong>${this.high_score_group_score} volleys with Players ${this.high_score_group_partners}`
-//   } else {
-//     text = `<strong>High Score for Group Game: </strong>No multi-player games yet!`
-//   }
-//   return $('#high-score-multi').html(text)
-// }
 
 const getProfile = (userId) => {
   $.ajax({
@@ -96,24 +66,3 @@ const getProfile = (userId) => {
     }
   });
 }
-
-//////// USER EDIT FUNCTIONS //////////
-
-// const getEditUser = (userId) => {
-//   $.ajax({
-//     method: 'get',
-//     url: `/users/${userId}/edit.json`,
-//     success: function(user) {
-//     let newUser = new User(user);
-//     let editHTML = newUser.formatEditPage();
-//     $('.main-content').append(editHTML);
-//     }
-//   });
-// }
-//
-// User.prototype.formatEditPage = function() {
-//   let editHTML = `
-//   <h3>Edit your MyKadima account:</h3><br>
-//   `
-//   return editHTML
-// }

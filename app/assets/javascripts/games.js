@@ -1,18 +1,10 @@
-//How do I show the ordinalized game number for this user in Game show page?
 
 $(() => {
   bindGameClickHandlers()
 })
 
 const bindGameClickHandlers = () => {
-  //User games index
-  // $(document).on("click", ".see-games", (e) => {
-  //   e.preventDefault();
-  //   let userId = $(".see-games").data("userid");
-  //   history.pushState(null, null, `/users/${userId}/games`);
-  //   clearContent();
-  //   getGames(userId);
-  // });
+
   // Game show
   $(document).on("click", ".clickable-row", function(e)  {
     e.preventDefault();
@@ -49,14 +41,6 @@ const bindGameClickHandlers = () => {
       }
     })
   })
-  // Add game get
-  // $(document).on("click",".add-game", (e) => {
-  //   e.preventDefault();
-  //   let userId = $(".add-game").data("userid");
-  //   history.pushState(null, null, `/users/${userId}/games/new`);
-  //   clearContent();
-  //   getNewGame(userId);
-  // });
 }
 
 
@@ -190,24 +174,3 @@ Game.prototype.formatGameShow = function() {
   `
   return gameShowHTML
 }
-
-///////// NEW GAME FUNCTIONS//////////
-
-// const getNewGame = (userId) => {
-//   $.ajax({
-//     method: 'get',
-//     url: `/users/${userId}/games/new.json`,
-//     success: function(data) {
-//       console.log(data)
-//       let newGameForm = newGameFormat()
-//       $('.main-content').append(newGameForm);
-//     }
-//   })
-// }
-//
-// const newGameFormat = () => {
-//   let newGameForm = `
-//     <h3>New Game Form</h3>
-//   `
-//   return newGameForm
-// }

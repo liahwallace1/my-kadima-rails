@@ -31,10 +31,6 @@ const getHome = () => {
   });
 }
 
-// $.getJSON('', function() {
-// let homeHTML = homeFormat()
-// $('.main-content').append(homeHTML);
-// })
 
 const homeFormat = () => {
   let homeHTML =
